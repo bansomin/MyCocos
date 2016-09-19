@@ -32,6 +32,7 @@ sz.UILoader = cc.Class.extend({
 
         var json = cc.loader.getRes(jsonFile);
         var version = json.version || json.Version;
+        cc.log("version = " + version);
         var rootNode;
         if (version[0] == 1) {
             rootNode = ccs.uiReader.widgetFromJsonFile(jsonFile);

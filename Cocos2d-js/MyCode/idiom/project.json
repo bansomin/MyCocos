@@ -1,0 +1,38 @@
+{
+    "project_type": "javascript",
+
+    "debugMode"     : 1,
+    "showFPS"       : true,
+    "frameRate"     : 60,
+    "noCache"       : false,
+    "id"            : "gameCanvas",
+    "renderMode"    : 0,
+    "engineDir"     :"frameworks/cocos2d-html5",
+
+    "modules"       : ["text-input", "extensions"],
+
+    "jsList" : [
+
+        "src/common/GameConfig.js",
+        "src/common/CommonConfig.js",
+
+        "src/resource/resource.js",
+
+        "src/ui/layers/GameLayer.js",
+        "src/ui/layers/StartLayer.js",
+        "src/ui/layers/ResultLayer.js",
+        "src/ui/layers/RuleLayer.js",
+        "src/ui/layers/CountDownLayer.js",
+        "src/ui/layers/DetailLayer.js",
+        "src/ui/layers/NextLevelLayer.js",
+
+        "src/ui/scenes/GameScene.js",
+        "src/ui/scenes/StartScene.js",
+
+        "src/model/CCUModel.js",
+        "src/model/WordCellModel.js",
+        "src/model/SoundManager.js",
+        "src/model/LevelInforModel.js"
+
+    ]
+}

@@ -1,0 +1,47 @@
+<Solution>
+  <PropertyGroup Name="framStudio" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="ui" />
+        <Image Name="add.png" />
+        <Image Name="add1.png" />
+        <Image Name="bg.png" />
+        <Image Name="carrot.png" />
+        <Image Name="chooseBg.png" />
+        <Project Name="ChooseLayer.csd" Type="Layer" />
+        <Image Name="corn.png" />
+        <Fnt Name="Font30.fnt" />
+        <Image Name="fr.png" />
+        <Image Name="fr1.png" />
+        <Image Name="gbg.png" />
+        <Image Name="gift.png" />
+        <Image Name="gift1.png" />
+        <Image Name="item.png" />
+        <Image Name="Item1.png" />
+        <Image Name="Item2.png" />
+        <Image Name="Item3.png" />
+        <Image Name="Item4.png" />
+        <Image Name="Item5.png" />
+        <Image Name="Item6.png" />
+        <Project Name="Layer.csd" Type="Layer" />
+        <TTF Name="Marker Felt.ttf" />
+        <Image Name="moneybg.png" />
+        <Image Name="moveItem1.png" />
+        <Image Name="moveItem2.png" />
+        <Image Name="moveItem3.png" />
+        <Image Name="moveItem4.png" />
+        <Image Name="moveItem5.png" />
+        <Image Name="moveItem6.png" />
+        <Fnt Name="MyFont.fnt" />
+        <Image Name="playerInfoBg.png" />
+        <Image Name="sbg.png" />
+        <Image Name="shop.png" />
+        <Image Name="shop1.png" />
+        <Image Name="shopitem.png" />
+        <Image Name="wheat.png" />
+        <Image Name="zbg.png" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

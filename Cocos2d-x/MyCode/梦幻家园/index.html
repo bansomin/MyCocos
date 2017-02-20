@@ -1,0 +1,205 @@
+<html>
+<head>
+	<meta charset='utf-8'/>
+	<title>梦幻家园——Layabox</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="tencent-x5-page-decoration" content="landscape"/>
+    <meta name="oupengmobile" content="game,fullscreen,lockrotation,landscape"/>
+    <meta name="x5-orientation" content="landscape"/>
+    <meta name="screen-orientation" content="landscape"/>
+    <meta name="imagemode" content="force"/>
+    <meta name="browsermode" content="application"/>
+	<meta name="full-screen" content="true"/>
+    <meta name="x5-fullscreen" content="true"/>
+    <meta name="360-fullscreen" content="true"/>
+	<meta name='screen-orientation' content='landscape' />
+	<meta name='x5-fullscreen' content='true' />
+	<link href="icon/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+	<link rel="apple-touch-icon-precomposed" href="icon/57x57.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icon/114x114.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icon/144x144.png" />
+
+	<meta http-equiv='expires' content='0' />
+	<script id="jsScript" type="text/javascript"></script>
+	<script type="text/javascript" src="js/WebGlSupport.js"></script>
+	<script type="text/javascript" src="js/index.js?lv=201604201819"></script>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="http://wx.lr.dawawa.com/index.php?m=menushare&a=getconfig&gameid=mhjy"></script>
+	<script type="text/javascript">
+		window.appDisplayName = "";
+		window.sequenceNumber = "75A34FEB22C7A761A9AE798D030DABB4";
+		window.DTGARequestUrl = "http://tdwv1.talkingdata.com/g/h5/v1/receive";
+		window.sessionStorage = window.localStorage;
+	</script>
+	<script type="text/javascript" src="http://sdk.talkingdata.com/websdk/js/sdk_release.js?v=1.02"></script>
+	<script id="mylayamarket" type="text/javascript"></script>	
+	<style>
+		html, body {
+			position: relative;
+			height: 100%;
+		}
+		body {			
+			margin: 0;
+			padding: 0;
+		}
+		
+		@media all and (orientation : landscape) { 
+			.splash { 
+				-ms-transform:rotate(0deg); 	/* IE 9 */
+				-moz-transform:rotate(0deg); 	/* Firefox */
+				-webkit-transform:rotate(0deg); /* Safari 和 Chrome */
+				-o-transform:rotate(0deg); 	/* Opera */
+			} 
+			.item{
+				width:400px;
+				height:280px;
+			}
+			.item2{
+				-webkit-transform:scale(0.8,0.8);
+				
+			}
+			.waitimg{
+				width:50px;height:52px;
+				-webkit-transform-origin:center center;
+				-webkit-animation:rotatea 1s linear infinite;
+			}
+
+		} 
+		@media all and (orientation : portrait){ 
+			.splash { 
+				transform:rotate(90deg);
+				-ms-transform:rotate(90deg); 	/* IE 9 */
+				-moz-transform:rotate(90deg); 	/* Firefox */
+				-webkit-transform:rotate(90deg); /* Safari 和 Chrome */
+				-o-transform:rotate(90deg); 	/* Opera */
+			} 
+
+			.item{
+				width:400px;
+				height:280px;
+			}
+			.item2{
+				transform:rotate(90deg);
+				-ms-transform:rotate(90deg); 	/* IE 9 */
+				-moz-transform:rotate(90deg); 	/* Firefox */
+				-webkit-transform:rotate(90deg); /* Safari 和 Chrome */
+				-o-transform:rotate(90deg); 	/* Opera */
+
+			}
+			.waitimg{
+				width:50px;height:52px;
+				background: url(images/wait.png) no-repeat center center;
+				position:absolute;left:25%;top:62%;
+				-webkit-transform-origin:center center;
+				-webkit-animation:rotatea 1s linear infinite;
+			}
+		} 
+		@media only screen 
+		  and (min-device-width: 375px) 
+		  and (max-device-width: 667px) 
+		  and (-webkit-min-device-pixel-ratio: 2) { 
+			.item{
+				-webkit-transform:scale(0.8,0.8);
+			}
+			
+		}
+		.splash{
+			text-align: center;
+			position: relative;
+			/* Center slide text vertically */
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			-webkit-align-items: center;
+			align-items: center;
+		}
+		.splash1{
+			text-align: center;
+			position: relative;
+			/* Center slide text vertically */
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			-webkit-align-items: center;
+			align-items: center;
+		}
+		
+		@-webkit-keyframes rotatea{
+			0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+			50% {-webkit-transform: rotate(180deg);}
+			100%{-webkit-transform:rotate(360deg);transform:rotate(360deg);}
+		}
+		
+	</style>
+	<script type="text/javascript">
+		var shareObj={
+			title:'梦幻家园——Layabox',
+			link:'http://mhjy.layabox.com',
+			imgUrl:'http://mhjy.layabox.com/icon/128x128.png',
+			desc:'快来和我一同开启浪漫之旅！'
+		};
+		wx.ready(function(){
+			wx.onMenuShareTimeline(shareObj);
+			wx.onMenuShareAppMessage(shareObj);
+			wx.onMenuShareQQ(shareObj);
+			wx.onMenuShareWeibo(shareObj);
+			wx.onMenuShareQZone(shareObj);
+		});
+		wx.error(function(res){
+			
+		});
+		window.onload = function()
+		{
+			window.openId = "10093";
+			window.openKey = "58ea441d3f17fe9febe8b0e0de7a87e7";
+			var mylayamarket = document.getElementById('mylayamarket');
+			mylayamarket.src = "http://plugins.dawawa.com/layaboxmarket.v2.js";
+			mylayamarket.onload = function()
+			{				
+				index.init();
+			}
+			mylayamarket.onerror = function()
+			{
+				mylayamarket.src = "http://plugins.dawawa.com/layaboxmarket.v2.js";
+			}
+			
+		}
+	</script>
+</head>
+<body id="bodyId" style="margin:0;overflow:none;overflow-x:hidden;overflow-y:hidden;background-color: #000000;">
+<div id="waitdiv" style="position:absolute;width:100%;height:100%;overflow: hidden;background-color: #ffffff;z-index: 20000001;">
+	<!-- <img src="images/loadingBg.jpg" style="position:absolute;width:100%;height:100%;display:none;"/> -->
+	<div id="logoBox" style="width:100%;height:100%;z-index:20000002;" class="splash">
+		<div class="item">
+			<img src="images/cp_logo.png?201604071529" style="margin-bottom:3px;margin-left:10px;"/><br>
+			<img src="images/Layabox_logo.png" style="position:relative;left:-2px;width:120px;height:32px;" />
+			<img id="waitImg" src="images/wait.png" class="waitimg" style="position:relative;left:-5px;width:35px;height:36px"/>
+			<div style="font-size:18px;font-family:'黑体';font-weight:500;height:24px;color:black">Powered by LayaAir Engine</div>
+			<div id="tips" style="font-size:16px;font-family:'黑体';font-weight:500;color:black">小提示：资源正在努力加载中...</div>
+		</div>
+	</div>
+	<div style="width:100%;height:100%;z-index: 20000003;" class="splash1">
+		<div id="gameGuide1" class="item2" style="width:100%;height:100%;background-size:contain;display:none;"></div>
+		<div id="gameGuide2" class="item2" style="width:100%;height:100%;background-size:contain;display:none;"></div>
+	</div>
+	<span id="debugText" style="display:none;position:absolute;z-index: 20000005;font-weight: 700;color:#ff9900;font-size: 20px;background-color: #0c0c0c;top:1px;left:1px;"></span>
+	<span id="debugButton" style="position:absolute;z-index: 20000006;width:15px;height:15px;display:block;top:1px;left:1px;"></span> 
+</div>
+</body>
+</html>

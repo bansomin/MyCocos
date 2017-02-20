@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>bg_love1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{640,960}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{640,960}</string>
+			</dict>
+			<key>bg_model.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{850,210},{65,65}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{65,65}</string>
+			</dict>
+			<key>Btn_set.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{640,0},{210,110}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{210,110}</string>
+			</dict>
+			<key>Pic_music.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{850,0},{210,110}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{210,110}</string>
+			</dict>
+			<key>Pic_sound.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{640,110},{210,110}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{210,110}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>StarsPlist.png</string>
+			<key>realTextureFileName</key>
+			<string>StarsPlist.png</string>
+			<key>size</key>
+			<string>{1024,1024}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>1024</integer>
+		</dict>
+	</dict>
+</plist>

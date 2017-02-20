@@ -1,0 +1,35 @@
+
+<div class="layout">
+    <div class="n-main-nav clearfix">
+<!--        <ul>-->
+<!--            <li class="current">-->
+<!--                <a title="系统错误">系统错误</a>-->
+<!--                <em class="n-nav-corner"></em>-->
+<!--            </li>-->
+<!--        </ul>-->
+    </div>
+    <div class="n-frame device-frame">
+        <div class="uinfo c_b">
+            <div class="">
+                <div class="">
+                    <div class="framedatabox">
+                        <div class="fdata">
+
+                            <h3>系统错误</h3>
+                        </div>
+                        <div class="fdata lblnickname">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery -->
+<script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/static/sso/js/bootstrap.min.js"></script>
+<script src="/static/js/laya_platform.js"></script>
+<script src="/static/js/vaildform.js"></script></body>
+</html>

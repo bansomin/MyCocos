@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>layabox proxy</title>
+</head>
+<script type="text/javascript">
+    function callback() {
+        var data = decodeURIComponent(window.location.hash);
+        parent.parent._LAYAOPEN_SDK.getDialog().close();
+        parent.parent._LAYAOPEN_SDK._callback.login(JSON.parse(data.substr(1)));
+    }
+</script>
+<body onload="callback()">
+</body>
+</html>

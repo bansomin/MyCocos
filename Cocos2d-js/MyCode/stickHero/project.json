@@ -14,11 +14,10 @@
     "jsList" : [
         "src/resource.js",
         "src/app.js",
-
+        "src/LoginScene.js",
         "src/MenuViewScene.js",
         "src/GameView.js",
         "src/GameConfig.js",
-        "src/GameOver.js",
-        "src/LoginScene.js"
+        "src/GameOver.js"
     ]
 }

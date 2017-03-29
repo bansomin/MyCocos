@@ -1,0 +1,40 @@
+{
+    "project_type": "javascript",
+
+    "debugMode"     : 0,
+    "showFPS"       : false,
+    "frameRate"     : 60,
+    "noCache"       : false,
+    "id"            : "gameCanvas",
+    "renderMode"    : 0,
+    "engineDir"     :"frameworks/cocos2d-html5",
+
+    "modules" : ["core", "kazmath", "render-texture", "motion-streak",
+                "shape-nodes", "actions", "transitions", "labels", "compression", "menus", "audio"],
+
+    "jsList" : [
+        "src/resource/resource.js",
+        "src/utilities/LoadingScene.js",
+        "src/common/CommonConfig.js",
+
+        "src/ui/other/SoundButtonUI.js",
+
+        "src/ui/layers/StartLayer.js",
+        "src/ui/layers/GameLayer.js",
+        "src/ui/layers/RuleLayer.js",
+        "src/ui/layers/ResultLayer.js",
+        "src/ui/layers/CountDownLayer.js",
+
+        "src/ui/scenes/GameScene.js",
+        "src/ui/scenes/StartScene.js",
+
+        "src/model/LetterLabelModel.js",
+        "src/model/HamsterModel.js",
+        "src/model/HammerModel.js",
+        "src/model/LevelInforModel.js",
+        "src/model/SoundManager.js",
+
+        "res/config/GameConfig.js"
+
+    ]
+}

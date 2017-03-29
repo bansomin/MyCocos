@@ -12,7 +12,6 @@
     "modules" : ["cocos2d", "extensions"],
 
     "jsList" : [
-        "src/jquery-2.1.3.min.js",
         "src/lsPopUp.js",
 
         "src/resource.js",

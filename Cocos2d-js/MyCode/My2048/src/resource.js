@@ -1,6 +1,9 @@
 var res = {
 
     HelloWorld_png          :   "res/HelloWorld.png",
+
+	//退出图片
+	png_exit                :   "res/exit.png",
     
     png_btn                 :   "res/btn.png",
     png_hao                 :   "res/hao.png",

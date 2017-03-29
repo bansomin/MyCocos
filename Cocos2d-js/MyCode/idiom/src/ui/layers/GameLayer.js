@@ -238,7 +238,7 @@ var GameLayer =cc.Layer.extend({
 				this.addChild(wordCell);
 
 				var W = wordCell.getBoxWidth();
-				//cc.log("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW : " + W);
+				//cc.log("W : " + W);
 
 				var wordObj = new Object();
 				wordObj.obj = wordCell;

@@ -4,11 +4,6 @@
  * Version :
  */
 
-/************Update************
- * Updated by HAO on 2016/12/28_10:38.
- * Brief   : 增加Android键监控
- */
-
 var StartScene = cc.Scene.extend({
 
 	//返回键

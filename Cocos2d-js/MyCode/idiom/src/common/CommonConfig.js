@@ -29,34 +29,3 @@ RCCommon.scaleXRatio = 1.0;
 
 //当前所使用的运行环境
 RCCommon.CURENV = RCCommon.ENVIRONMENTS.PRD;
-
-RCCommon.effectHit = null;
-RCCommon.effectBtn = null;
-RCCommon.effectRight = null;
-RCCommon.effectWrong = null;
-RCCommon.effectSelect = null;
-RCCommon.effectCountDown = null;
-
-//添加音效
-RCCommon.playEffect=function(_name, _volume){
-
-	var sound = new Howl({
-		src: [_name],
-
-		onend: function() {
-			//cc.log('Finished!');
-		}
-	});
-	if (sound){
-		sound.stop();
-	}
-	sound.volume(_volume);
-	sound.play();
-
-	return sound;
-};
-
-
-
-
-

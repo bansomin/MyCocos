@@ -86,7 +86,7 @@ var CountDownLayer = cc.Layer.extend({
 			}
 			else {
 				//播放ReadyGo音效
-				//SoundManager.playReadyGoSound();
+				SoundManager.playReadyGoSound();
 			}
 			this._time ++;
 		}.bind(this),1000);

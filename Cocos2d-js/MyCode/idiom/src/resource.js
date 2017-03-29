@@ -3,6 +3,9 @@ var res = {
     //合图
     graph_plist :   "res/pic/graph.plist",
     graph_png   :   "res/pic/graph.png",
+	
+	    //退出图片
+    png_exit        :   "res/pic/exit.png",
 
     //图片
 	png_applogo		:	"res/pic/applogo.png",
@@ -33,14 +36,6 @@ var res = {
 	// 	srcs : ["res/font/arial.ttf"]
 	// }
 
-	music_btn       :   "res/music/btn4.mp3",
-	music_right     :   "res/music/right.mp3",
-	music_select    :   "res/music/btn3.mp3",
-	music_countDown :   "res/music/down1.mp3",
-	music_bgm       :   "res/music/bgm.mp3",
-	music_hit       :   "res/music/hit.mp3",
-	music_wrong     :   "res/music/wrong1.mp3",
-	music_readygo	:   "res/music/readygo.mp3"
 };
 
 var g_resources = [

@@ -1,18 +1,18 @@
 {
     "project_type": "javascript",
 
-    "debugMode"     : 1,
-    "showFPS"       : true,
+    "debugMode"     : 0,
+    "showFPS"       : false,
     "frameRate"     : 60,
     "noCache"       : false,
     "id"            : "gameCanvas",
     "renderMode"    : 0,
     "engineDir"     :"frameworks/cocos2d-html5",
 
-    "modules"       : ["text-input", "extensions"],
+    "modules"       : ["text-input", "core", "kazmath", "render-texture", "motion-streak",
+                        "shape-nodes", "actions", "transitions", "labels", "compression", "menus", "audio"],
 
     "jsList" : [
-
         "src/common/GameConfig.js",
         "src/common/CommonConfig.js",
 

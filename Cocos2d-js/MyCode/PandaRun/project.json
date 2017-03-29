@@ -1,0 +1,55 @@
+{
+    "project_type": "javascript",
+
+    "debugMode" : 1,
+    "showFPS" : true,
+    "frameRate" : 60,
+    "noCache" : false,
+    "id" : "gameCanvas",
+    "renderMode" : 0,
+    "engineDir":"frameworks/cocos2d-html5",
+
+    "modules" : ["cocos2d", "extensions", "external"],
+
+    "jsList" : [
+        "src/resource.js",
+
+        "src/utilities/LoadingScene.js",
+
+        "src/common/GameConfig.js",
+        "src/common/SoundManager.js",
+        "src/common/MessageBox.js",
+
+        "src/modular/ToggleCell.js",
+        "src/modular/BarCell.js",
+        "src/modular/PriceItemCell.js",
+
+        "src/roles/Hero.js",
+        "src/roles/Gold.js",
+        "src/roles/Platform.js",
+        "src/roles/RedShoes.js",
+        "src/roles/BlueShoes.js",
+        "src/roles/Magnet.js",
+        "src/roles/ObjectShapedGenerator.js",
+        "src/roles/ObjectRandomGenerator.js",
+        "src/roles/PlatformGenerator.js",
+
+        "src/layers/SplashLayer.js",
+        "src/layers/GameOpeningLayer.js",
+        "src/layers/WelecomeLayer.js",
+        "src/layers/UserInforLayer.js",
+        "src/layers/AboutLayer.js",
+        "src/layers/SetLayer.js",
+        "src/layers/StoreLayer.js",
+        "src/layers/RankLayer.js",
+        "src/layers/SelectModelLayer.js",
+        "src/layers/PlaySingleLayer.js",
+        "src/layers/HubLayer.js",
+        "src/layers/GameBackgroundLayer.js",
+
+        "src/scenes/SplashScene.js",
+        "src/scenes/WelecomeScene.js",
+        "src/scenes/PlaySingleScene.js"
+
+    ]
+}

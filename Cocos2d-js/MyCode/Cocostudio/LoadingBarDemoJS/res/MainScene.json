@@ -1,0 +1,117 @@
+{
+  "ID": "a2ee0952-26b5-49ae-8bf9-4f1d6279b798",
+  "Version": "3.10.0.0",
+  "Name": "MainScene",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "HelloWorld.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 480.0,
+              "Y": 320.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "PreSize": {
+              "X": 2.0,
+              "Y": 2.0
+            },
+            "RightMargin": -480.0,
+            "TopMargin": -320.0,
+            "Tag": 5,
+            "ActionTag": 953446860,
+            "Size": {
+              "X": 960.0,
+              "Y": 640.0
+            },
+            "Name": "Default",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "ProgressInfo": 50,
+            "ImageFileData": {
+              "Type": "Default",
+              "Path": "Default/LoadingBarFile.png",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 500.0,
+              "Y": 100.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 1.0417,
+              "Y": 0.3125
+            },
+            "PreSize": {
+              "X": 1.2708,
+              "Y": 0.0469
+            },
+            "LeftMargin": 195.0,
+            "RightMargin": -325.0,
+            "TopMargin": 212.5,
+            "BottomMargin": 92.5,
+            "Tag": 3,
+            "ActionTag": -343603611,
+            "Size": {
+              "X": 610.0,
+              "Y": 15.0
+            },
+            "Name": "LoadingBar_1",
+            "ctype": "LoadingBarObjectData"
+          }
+        ],
+        "Size": {
+          "X": 960.0,
+          "Y": 640.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "Default/LoadingBarFile.png",
+        "HelloWorld.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Scene"
+}

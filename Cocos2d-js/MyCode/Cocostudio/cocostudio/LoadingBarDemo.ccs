@@ -1,0 +1,15 @@
+<Solution>
+  <PropertyGroup Name="LoadingBarDemo" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Image Name="bg.jpg" />
+        <Image Name="HelloWorld.png" />
+        <Project Name="LoadingLayer.csd" Type="Layer" />
+        <Project Name="MainScene.csd" Type="Scene" />
+        <Image Name="sliderBG.png" />
+        <Image Name="sliderProgress.png" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

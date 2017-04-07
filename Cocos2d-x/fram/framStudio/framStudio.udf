@@ -3,7 +3,6 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="ChooseLayer.csd" />
           <FilePathData Path="Layer.csd" />
         </OpenedDocuments>
         <ActiveDocument Path="Layer.csd" />

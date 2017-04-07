@@ -36,7 +36,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
-    director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
+    director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::NO_BORDER);
 	//TIMTIdirector->setContentScaleFactor(1440.0f/480.0f);
 
     // turn on display FPS
@@ -80,11 +80,12 @@ void AppDelegate::loadResources() {
 	FileUtils::getInstance()->addSearchPath("images");
 
 	//¼ÓÔØ¶¯»­
-	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_FIGHTER);
+/*	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_FIGHTER);
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_BOWMAN);
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_GUNNER);
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_MEATSHIELD);
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_HERO_ARAGORN);
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_SKILL_1);
-	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_SKILL_2);
+	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_SKILL_2);	*/
+
 };

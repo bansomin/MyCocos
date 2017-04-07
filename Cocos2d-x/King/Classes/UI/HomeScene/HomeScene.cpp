@@ -8,26 +8,46 @@ bool HomeScene::init() {
 		return false;
 	}
 
+	_cache = Director::getInstance()->getTextureCache();
+
 	_origin = Vec2::ZERO;
 	_Wsize = Director::getInstance()->getWinSize();
+
+	_hubLayer = HomeHubLayer::create();
+	this->addChild(_hubLayer, 9);
 
 	//先创建背景层
 	_bgLayer = LayerColor::create();
 	this->addChild(_bgLayer, -1);
 
 	//在背景层上添加绿色拖动层
-	_bgMap = Sprite::create(IMG_BG_MAP);
-	_bgMap->setAnchorPoint(Vec2::ZERO);
-	_bgMap->setPosition(Vec2::ZERO);
+	//_bgMap = Sprite::create(IMG_BG_MAP);
+	_bgMap = Sprite::createWithTexture(_cache->getTextureForKey(IMG_BG_MAP));
+	//_bgMap->setAnchorPoint(Vec2::ZERO);
+	//_bgMap->setPosition(Vec2::ZERO);
+	_bgMap->setPosition(_Wsize/2);
 	_bgLayer->addChild(_bgMap);
 
 	//拖动层上添加玩家城池（map）
-	auto map = Sprite::create(IMG_HOME_BG);
-	map->setAnchorPoint(Vec2::ZERO);
-	map->setPosition(Vec2::ZERO);
+	//auto map = Sprite::create(IMG_HOME_BG);
+	//Texture2D* text = Director::getInstance()->getTextureCache()->getTextureForKey(IMG_HOME_BG);
+	auto map = Sprite::createWithTexture(_cache->getTextureForKey(IMG_HOME_BG));
+	//map->setAnchorPoint(Vec2::ZERO);
+	//map->setPosition(Vec2::ZERO);
+	map->setPosition(Vec2(_bgMap->getContentSize().width/2, _bgMap->getContentSize().height/2));
 	_bgMap->addChild(map, 1);
-	//初始缩小0.5
-	_bgMap->setScale(0.5f);
+
+	//玩家城池上添加瓦片地图
+	_tileMap = TMXTiledMap::create("common/map.tmx");
+	//_tileMap->setAnchorPoint(Vec2::ZERO);
+	_tileMap->setScale(0.5);
+	_tileMap->setPosition(Vec2(0, 100));
+	//_bgMap->addChild(_tileMap, 100);
+
+	//初始缩小
+	_bgMap->setScale(0.8f);
+	//初始动画
+	_bgMap->runAction(EaseBackInOut::create(ScaleTo::create(1.0f, 0.5f)));
  	
 	auto listener = EventListenerTouchAllAtOnce::create();
 	listener->onTouchesBegan = CC_CALLBACK_2(HomeScene::onTouchesBegan, this);
@@ -66,14 +86,14 @@ void HomeScene::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, coco
 
 		/*******************边界控制，约束_bgMap的位置*******************/
 		//左右范围
-		auto x1 = size.width * _bgMap->getAnchorPoint().x;
-		auto x2 = -size.width+_Wsize.width+size.width*_bgMap->getAnchorPoint().x;
+		auto x1 = size.width * _bgMap->getAnchorPoint().x;	  //(向左侧滑动)
+		auto x2 = -size.width + _Wsize.width + size.width * _bgMap->getAnchorPoint().x;	 //(向右侧滑动)
 		afterPos.x = MIN(afterPos.x, x1);
 		afterPos.x = MAX(afterPos.x, x2);
 
 		//上下范围
-		auto y1 = size.height*_bgMap->getAnchorPoint().y;
-		auto y2 = -size.height+_Wsize.height+size.height*_bgMap->getAnchorPoint().y;
+		auto y1 = size.height * _bgMap->getAnchorPoint().y;
+		auto y2 = -size.height + _Wsize.height+size.height * _bgMap->getAnchorPoint().y;
 		afterPos.y = MIN(afterPos.y, y1);
 		afterPos.y = MAX(afterPos.y, y2);
 

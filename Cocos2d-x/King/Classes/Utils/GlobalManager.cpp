@@ -2,6 +2,7 @@
 
 //use
 #include "UI\HomeScene\HomeScene.h"
+#include "UI\WorldScene\WorldScene.h"
 
 GlobalManager* GlobalManager::_instance = nullptr;
 GlobalManager* GlobalManager::getInstance() {
@@ -28,7 +29,9 @@ bool GlobalManager::init() {
 };
 
 void GlobalManager::enterWorldScene() {
+	//log("enterWorldScene");
 
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5f, WorldScene::createScene()));
 };
 
 void GlobalManager::enterHomeScene() {

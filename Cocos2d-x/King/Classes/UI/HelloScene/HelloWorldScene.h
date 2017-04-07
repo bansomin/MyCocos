@@ -39,6 +39,8 @@ private:
 public:
 	void loadingRes();
 	void loadResourcesUpdate();
+	void loadResourcesUpdateAmr(float dt);
+	void updateLoadingPrg();
 	void changeScene();		//³¡¾°Ìø×ª
 };
 

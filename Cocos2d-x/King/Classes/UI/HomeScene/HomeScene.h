@@ -9,6 +9,9 @@ HISTORY	:
 #define _HOMESCENE_H__
 
 #include "cocos2d.h"
+
+//use
+#include "UI\HomeScene\HomeHubLayer.h"
 using namespace cocos2d;
 
 class HomeScene : public Layer {
@@ -27,8 +30,14 @@ private:
 	Size _Wsize;
 	Vec2 _origin;
 
-	Layer* _bgLayer;	//±≥æ∞≤„
-	Sprite* _bgMap;		//±≥æ∞Õº	
+	TMXTiledMap* _tileMap;	//Õﬂ∆¨µÿÕº
+	Layer* _bgLayer;		//±≥æ∞≤„
+	Sprite* _bgMap;			//±≥æ∞Õº	
+
+	//
+	TextureCache*	_cache;	//Œ∆¿Ìª∫¥Ê
+
+	HomeHubLayer* _hubLayer;
 };
 
 #endif // _HOMESCENE_H__

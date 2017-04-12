@@ -1,8 +1,10 @@
 #include "HelloWorldScene.h"
 
 //use
+#include "Utils\DBManager.h"
+#include "Utils\DataManager.h"
 #include "Utils\GlobalManager.h"
-#include "Utils/Config.h"
+#include "Utils\Config.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 using namespace cocostudio;
@@ -45,6 +47,11 @@ bool HelloWorld::init()
 
 //开始加载资源
 void HelloWorld::loadingRes() {
+
+	//创建数据库
+	DBM()->createTable();
+	//将相关数据加载到内存中
+	DM();
 
 	auto cache = Director::getInstance()->getTextureCache();	//缓存
 
@@ -151,7 +158,7 @@ void HelloWorld::loadResourcesUpdate() {
 void HelloWorld::updateLoadingPrg() {
 
 	resCount++;
-	log("Loaded : %d", resCount);
+	//log("Loaded : %d", resCount);
 	//更新进度条
 	float percent = 100*resCount/72;	//一共需要加载72次
 	_loadingBar->setPercent(percent);

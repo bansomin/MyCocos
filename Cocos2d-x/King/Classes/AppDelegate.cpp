@@ -4,9 +4,11 @@
 USING_NS_CC;
 
 //use
-#include "Utils\Config.h"
-#include "cocostudio\CocoStudio.h"
-using namespace cocostudio;
+//#include "Utils\DBManager.h"
+//#include "Utils\DataManager.h"
+//#include "Utils\Config.h"
+//#include "cocostudio\CocoStudio.h"
+//using namespace cocostudio;
 
 AppDelegate::AppDelegate() {
 
@@ -36,7 +38,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
-    director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::NO_BORDER);
+    director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
 	//TIMTIdirector->setContentScaleFactor(1440.0f/480.0f);
 
     // turn on display FPS
@@ -47,12 +49,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     FileUtils::getInstance()->addSearchPath("res");
 
+	//this->loadResources();
+
     // create a scene. it's an autorelease object
     auto scene = HelloWorld::createScene();
-
     // run
     director->runWithScene(scene);
-
     return true;
 }
 
@@ -75,9 +77,12 @@ void AppDelegate::applicationWillEnterForeground() {
 void AppDelegate::loadResources() {
 
 	//创建数据库
+	//DBM()->createTable();
+	//将相关数据加载到内存中
+	//DM();
 
 	//加载搜索路径
-	FileUtils::getInstance()->addSearchPath("images");
+	//FileUtils::getInstance()->addSearchPath("images");
 
 	//加载动画
 /*	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_FIGHTER);
@@ -87,5 +92,7 @@ void AppDelegate::loadResources() {
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_HERO_ARAGORN);
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_SKILL_1);
 	ArmatureDataManager::getInstance()->addArmatureFileInfo(ANIM_SKILL_2);	*/
+	//auto scene = HelloWorld::createScene();
+	//Director::getInstance()->runWithScene(scene);
 
 };

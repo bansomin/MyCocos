@@ -16,6 +16,7 @@ using namespace cocos2d;
 #include "ui\CocosGUI.h"
 using namespace cocostudio;
 using namespace ui;
+using namespace std;
 
 class HomeHubLayer : public Layer {
 
@@ -33,6 +34,29 @@ public:
 private:
 	Size _Wsize;
 
+	string _name;
+	int _level;
+	int _exp;
+	int _expRequire;
+	int _ringCount;
+	int _goldCount;
+	int _woodCount;
+	int _goldCapacity;
+	int _woodCapacity;
+
+	Text* _playerName;
+	Text* _playerLevel;
+	LoadingBar* _playerBar;
+
+	Text* _goldCountText;
+	Text* _goldCapacityText;
+	LoadingBar* _goldBar;
+
+	Text* _woodCountText;
+	Text* _woodCapacityText;
+	LoadingBar*_woodBar;
+
+	Text* _ringCountText;
 };
 
 #endif // _HOMEHUBLAYER_H__

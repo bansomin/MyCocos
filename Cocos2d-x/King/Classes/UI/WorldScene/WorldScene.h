@@ -11,12 +11,18 @@ HISTORY	:
 #include "cocos2d.h"
 using namespace cocos2d;
 
+//use
+#include "UI/WorldScene/WorldHubLayer.h"
+
 class WorldScene : public Layer {
 
 public:
 	static Scene* createScene();
 	virtual bool init(); 
 	CREATE_FUNC(WorldScene);
+
+private:
+	WorldHubLayer* _hubLayer;
 
 };
 

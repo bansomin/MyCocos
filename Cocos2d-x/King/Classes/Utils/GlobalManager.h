@@ -10,6 +10,7 @@ HISTORY	:
 
 #include "cocos2d.h"
 using namespace cocos2d;
+using namespace std;
 
 #define GM() GlobalManager::getInstance()
 
@@ -24,6 +25,10 @@ private:
 	static GlobalManager* _instance;
 
 public:
+	int getTimeStamp();						// 获取时间戳
+	string getIntToStr(int value);			//int转string
+	int getStrToInt(string value);			//string转int
+
 	//场景切换
 	void enterWorldScene();
 	void enterHomeScene();

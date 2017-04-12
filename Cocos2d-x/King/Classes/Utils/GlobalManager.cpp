@@ -20,12 +20,41 @@ GlobalManager::GlobalManager() {
 };
 
 GlobalManager::~GlobalManager() {
-
+	_instance = nullptr;
 };
 
 bool GlobalManager::init() {
 
 	return true;
+};
+
+// 获取时间戳
+int GlobalManager::getTimeStamp() {
+	
+	timeval time;
+	gettimeofday(&time, NULL);
+	return time.tv_sec;
+};
+
+//intתstring
+string GlobalManager::getIntToStr(int value) {
+	if(value<=0) return "0";
+	string str = "";
+	while(value) {
+		str += value%10+'0';
+		value /= 10;
+	}
+	reverse(str.begin(), str.end());
+	return str;
+};
+
+// stringתint
+int GlobalManager::getStrToInt(string value) {
+	int x = 0;
+	for(int i = 0; i < (int)value.length(); i++) {
+		x = x*10+(value[i]-'0');
+	}
+	return x;
 };
 
 void GlobalManager::enterWorldScene() {

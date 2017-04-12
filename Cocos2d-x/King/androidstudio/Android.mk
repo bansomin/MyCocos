@@ -12,12 +12,18 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/AppDelegate.cpp \
-                   ../../../Classes/UI/HelloScene/HelloWorldScene.cpp \
-                   ../../../Classes/UI/HomeScene/HomeScene.cpp \
-				   ../../../Classes/UI/HomeScene/HomeHubLayer.cpp \
-				   ../../../Classes/UI/WorldScene/WorldScene.cpp \
+				   ../../../Classes/Helper/Sqlite3/sqlite3.c \
+				   ../../../Classes/Helper/CSVParser/CSVParser.cpp \
+				   ../../../Classes/Model/Notice.cpp \
 				   ../../../Classes/UI/DialogScene/NewBuildDialog.cpp \
-                   ../../../Classes/Utils/GlobalManager.cpp 
+				   ../../../Classes/UI/HelloScene/HelloWorldScene.cpp \
+                   ../../../Classes/UI/HomeScene/HomeScene.cpp \
+                   ../../../Classes/UI/HomeScene/HomeHubLayer.cpp \
+                   ../../../Classes/UI/WorldScene/WorldScene.cpp \
+                   ../../../Classes/UI/WorldScene/WorldHubLayer.cpp \
+                   ../../../Classes/Utils/DataManager.cpp \
+				   ../../../Classes/Utils/DBManager.cpp \
+				   ../../../Classes/Utils/GlobalManager.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes
 

@@ -6,6 +6,9 @@ bool WorldScene::init() {
 		return false;
 	}
 
+	_hubLayer = WorldHubLayer::create();
+	this->addChild(_hubLayer, 9);
+
 	return true;
 };
 

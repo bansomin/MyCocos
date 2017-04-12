@@ -1,6 +1,7 @@
 #include "HomeHubLayer.h"
 
 #include "Utils\Config.h"
+#include "Utils\DataManager.h"
 #include "Utils\GlobalManager.h"
 #include "UI\DialogScene\NewBuildDialog.h"
 
@@ -28,6 +29,20 @@ bool HomeHubLayer::init() {
 
 void HomeHubLayer::loadData() {
 
+	ValueMap data = DM()->_player.at(1).asValueMap();
+
+	_name = data["Name"].asString();
+	_level = data["Level"].asInt();
+	_exp = data["Exp"].asInt();
+	_expRequire = DM()->getPlayerExpRequire(_level);
+	_ringCount = data["RingCount"].asInt();
+	_goldCount = data["GoldCount"].asInt();
+	_woodCount = data["WoodCount"].asInt();
+	_goldCapacity = data["GoldCapacity"].asInt();
+	_woodCapacity = data["WoodCapacity"].asInt();
+
+	log("%s %d %d %d", _name.c_str(), _level, _exp, _expRequire);
+	log("(%d,%d,%d) (%d,%d)", _goldCount, _woodCount, _ringCount, _goldCapacity, _woodCapacity);
 };
 
 void HomeHubLayer::loadUI() {
@@ -48,7 +63,35 @@ void HomeHubLayer::loadUI() {
 	auto buildBtn = (Button*)Helper::seekWidgetByName(ui, "BuildButton");
 	buildBtn->addTouchEventListener(CC_CALLBACK_2(HomeHubLayer::btnCallback, this));
 
+	//Player
+	_playerName		= (Text*)Helper::seekWidgetByName(ui, "PlayerName");
+	_playerLevel	= (Text*)Helper::seekWidgetByName(ui, "PlayerLevel");
+	_playerBar		= (LoadingBar*)Helper::seekWidgetByName(ui, "PlayerBar");
+	_playerName->setString(_name);
+	_playerLevel->setString(GM()->getIntToStr(_level));
+	_playerBar->setPercent((_exp*100.0)/_expRequire);
+
+	//Gold
+	_goldCountText		= (Text*)Helper::seekWidgetByName(ui, "GoldCount");
+	//_goldCapacityText	= (Text*)Helper::seekWidgetByName(ui, "GoldCapacity");
+	_goldBar		= (LoadingBar*)Helper::seekWidgetByName(ui, "GoldBar");
+	_goldCountText->setString(StringUtils::format("%d / %d", _goldCount, _goldCapacity));
+	//_goldCapacityText->setString(GM()->getIntToStr(_goldCapacity));
+	_goldBar->setPercent((_goldCount*100.0)/_goldCapacity);
+
+	//Wood
+	_woodCountText = (Text*)Helper::seekWidgetByName(ui, "WoodCount");
+	//_woodCapacityText = (Text*)Helper::seekWidgetByName(ui, "WoodCapacity");
+	_woodBar = (LoadingBar*)Helper::seekWidgetByName(ui, "WoodBar");
+	_woodCountText->setString(StringUtils::format("%d / %d", _woodCount, _woodCapacity));
+	//_woodCapacityText->setString(GM()->getIntToStr(_woodCapacity));
+	_woodBar->setPercent((_woodCount*100.0)/_woodCapacity);
+
+	//Ring
+	_ringCountText = (Text*)Helper::seekWidgetByName(ui, "RingCount");
+	_ringCountText->setString(StringUtils::format("%d", _ringCount));
 };
+
 
 void HomeHubLayer::btnCallback(Ref* sender, Widget::TouchEventType type) {
 	if(type == Widget::TouchEventType::ENDED) {
@@ -63,7 +106,7 @@ void HomeHubLayer::btnCallback(Ref* sender, Widget::TouchEventType type) {
 			log("BuildButton");
 
 			auto buildDialog = NewBuildDialog::create();
-			this->getParent()->addChild(buildDialog);
+			this->getParent()->addChild(buildDialog, 99);
 		}
 	}
 };

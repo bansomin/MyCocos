@@ -25,19 +25,19 @@ void Notice::showUI(string info) {
 	this->addChild(label);
 
 	auto action1 = Spawn::create(
-		MoveBy::create(0.3f, Vec2(0, 100)),
-		FadeIn::create(0.3f),
+		MoveBy::create(1.0f, Vec2(0, 100)),
+		FadeIn::create(1.0f),
 		nullptr);
 	auto action2 = Spawn::create(
-		MoveBy::create(0.3f, Vec2(0, 100)),
-		FadeOut::create(0.3f),
+		MoveBy::create(1.0f, Vec2(0, 100)),
+		FadeOut::create(1.0f),
 		nullptr);
 	auto func = CallFunc::create(CC_CALLBACK_0(Notice::remove, this));
 
 	label->runAction(
 		Sequence::create(
 			action1,
-			DelayTime::create(1.0f),
+			//DelayTime::create(1.0f),
 			action2,
 			func,
 			nullptr

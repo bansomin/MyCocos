@@ -73,9 +73,9 @@ void HelloWorld::loadingRes() {
 	cache->addImageAsync(IMG_WOOD, CC_CALLBACK_0(HelloWorld::loadResourcesUpdate, this));
 	cache->addImageAsync(IMG_RING, CC_CALLBACK_0(HelloWorld::loadResourcesUpdate, this));
 
-	cache->addImageAsync(IMG_BUTTON_INFOOPT, CC_CALLBACK_0(HelloWorld::loadResourcesUpdate, this));
-	cache->addImageAsync(IMG_BUTTON_UPGRADEOPT, CC_CALLBACK_0(HelloWorld::loadResourcesUpdate, this));
-	cache->addImageAsync(IMG_BUTTON_CANTUPGRADEOPT, CC_CALLBACK_0(HelloWorld::loadResourcesUpdate, this));
+	//cache->addImageAsync(IMG_BUTTON_INFOOPT, CC_CALLBACK_0(HelloWorld::loadResourcesUpdate, this));
+	//cache->addImageAsync(IMG_BUTTON_UPGRADEOPT, CC_CALLBACK_0(HelloWorld::loadResourcesUpdate, this));
+	//cache->addImageAsync(IMG_BUTTON_CANTUPGRADEOPT, CC_CALLBACK_0(HelloWorld::loadResourcesUpdate, this));
 	cache->addImageAsync(IMG_BUTTON_ENTEROPT, CC_CALLBACK_0(HelloWorld::loadResourcesUpdate, this));
 	cache->addImageAsync(IMG_BUTTON_CANCLE, CC_CALLBACK_0(HelloWorld::loadResourcesUpdate, this));
 	cache->addImageAsync(IMG_BUTTON_OK, CC_CALLBACK_0(HelloWorld::loadResourcesUpdate, this));
@@ -160,7 +160,7 @@ void HelloWorld::updateLoadingPrg() {
 	resCount++;
 	//log("Loaded : %d", resCount);
 	//更新进度条
-	float percent = 100*resCount/72;	//一共需要加载72次
+	float percent = 100*resCount/69;	//一共需要加载69次
 	_loadingBar->setPercent(percent);
 	_text->setString(StringUtils::format("%d%c", (int)_loadingBar->getPercent(), '%'));
 

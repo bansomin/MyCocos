@@ -12,6 +12,8 @@ HISTORY	:
 
 //use
 #include "UI\HomeScene\HomeHubLayer.h"
+#include "UI\HomeScene\HomeMapLayer.h"
+#include "UI\HomeScene\HomeOptionLayer.h"
 using namespace cocos2d;
 
 class HomeScene : public Layer {
@@ -21,23 +23,10 @@ public:
 	virtual bool init();
 	CREATE_FUNC(HomeScene);
 
-public:
-	void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* event);
-	void onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* event);
-	void onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* event);
-
 private:
-	Size _Wsize;
-	Vec2 _origin;
-
-	TMXTiledMap* _tileMap;	//Õﬂ∆¨µÿÕº
-	Layer* _bgLayer;		//±≥æ∞≤„
-	Sprite* _bgMap;			//±≥æ∞Õº	
-
-	//
-	TextureCache*	_cache;	//Œ∆¿Ìª∫¥Ê
-
 	HomeHubLayer* _hubLayer;
+	HomeMapLayer* _mapLayer;
+	HomeOptionLayer* _optionLayer;
 };
 
 #endif // _HOMESCENE_H__

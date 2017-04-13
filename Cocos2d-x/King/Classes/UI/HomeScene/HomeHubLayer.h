@@ -31,6 +31,13 @@ public:
 	void loadUI();
 	void btnCallback(Ref* sender, Widget::TouchEventType type);
 
+	void addGold(int count);
+	void addWood(int count);
+	void addPlayerExp(int count);
+	void setMapLayer(Layer* layer);
+	void setGoldCapacity(int count);
+	void setWoodCapacity(int count);
+
 private:
 	Size _Wsize;
 
@@ -44,16 +51,18 @@ private:
 	int _goldCapacity;
 	int _woodCapacity;
 
+	Layer* _mapLayer;
+
 	Text* _playerName;
 	Text* _playerLevel;
 	LoadingBar* _playerBar;
 
 	Text* _goldCountText;
-	Text* _goldCapacityText;
+	//Text* _goldCapacityText;
 	LoadingBar* _goldBar;
 
 	Text* _woodCountText;
-	Text* _woodCapacityText;
+	//Text* _woodCapacityText;
 	LoadingBar*_woodBar;
 
 	Text* _ringCountText;

@@ -85,12 +85,18 @@ public:
 	void loadBattleInfo();					// 加载关卡信息
 
 
-	void updatePlayerExp(int exp);			//更新玩家经验
-
+public:
+	void updateGold(int count);				//更新金币
+	void updateWood(int count);				//更新木材
+	void updateGoldCapacity(int count);		//更新金币容量
+	void updateWoodCapacity(int count);		//更新木材容量
+	void updateRing(int count);				//更新奖牌
+	void updatePlayerExp(int count);		//更新玩家经验
 
 	int getPlayerExpRequire(int level);				//获取玩家的等级需求							
 	ValueMap& getBuildingInfo(int buildingID);		// 根据建筑ID，获取建筑信息
 	void bindingIndex(ValueVector &data, map<string, int>& index, string ID);// 绑定下标
+
 
 };
 

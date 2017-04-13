@@ -182,7 +182,7 @@ static const char* IMG_BUILDING_Laser_Broken = "images/building/Laser_broken.png
 static const char* IMG_TREE = "images/building/Tree.png";
 
 // Font
-static const char* FONT_ARIAL = "arial.ttf";
+static const char* FONT_ARIAL = "fonts/arial.ttf";
 
 // Music
 static const char* OGG_BACKGROUND = "music/background.mp3";

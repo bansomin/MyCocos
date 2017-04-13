@@ -49,11 +49,11 @@ private:
 	int _woodCapacity;
 
 	Text* _goldCountText;
-	Text* _goldCapacityText;
+	//Text* _goldCapacityText;
 	LoadingBar* _goldBar;
 
 	Text* _woodCountText;
-	Text* _woodCapacityText;
+	//Text* _woodCapacityText;
 	LoadingBar* _woodBar;
 
 };

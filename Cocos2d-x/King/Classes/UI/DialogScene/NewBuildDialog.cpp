@@ -92,8 +92,8 @@ void NewBuildDialog::hideDialog() {
 
 void NewBuildDialog::showNotice(string info) {
 	
-	//auto notice = Notice::create(info);
-	//this->getParent()->addChild(notice, 999);
+	auto notice = Notice::create(info);
+	this->getParent()->addChild(notice, 999);
 };
 
 void NewBuildDialog::removeDialog() {

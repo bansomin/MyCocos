@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dict>
+  <key>info</key>
+  <string>信息</string>  
+  <key>enter</key>
+  <string>进入</string>  
+  <key>update</key>
+  <string>升级</string>
+  <key>headquarters</key>
+  <string>司令部</string>
+</dict>

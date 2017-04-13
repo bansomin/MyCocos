@@ -85,11 +85,25 @@ void WorldHubLayer::loadUI() {
 //加金币
 void WorldHubLayer::addGold(int count) {
 
+	//判断是否超过最大容量 
+	int nowGold = _goldCount + count;
+	_goldCount = MIN(nowGold, _goldCapacity);
+	DM()->updateGold(_goldCount);
+
+	_goldCountText->setString(StringUtils::format("%d / %d", _goldCount, _goldCapacity));
+	_goldBar->setPercent((_goldCount*100.0)/_goldCapacity);
 };
 
 //加木头
 void WorldHubLayer::addWood(int count) {
 
+	//判断是否超过最大容量 
+	int newCount = _woodCount + count;
+	_woodCount = MIN(newCount, _woodCapacity);
+	DM()->updateGold(_woodCount);
+
+	_woodCountText->setString(StringUtils::format("%d / %d", _woodCount, _woodCapacity));
+	_woodBar->setPercent((_woodCount*100.0)/_woodCapacity);
 };
 
 void WorldHubLayer::btnCallback(Ref* sender, Widget::TouchEventType type) {

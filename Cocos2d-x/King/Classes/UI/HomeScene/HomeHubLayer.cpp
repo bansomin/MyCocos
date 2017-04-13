@@ -92,9 +92,71 @@ void HomeHubLayer::loadUI() {
 	_ringCountText->setString(StringUtils::format("%d", _ringCount));
 };
 
+void HomeHubLayer::addGold(int count) {
+	
+	//判断是否超过最大容量 
+	int nowGold = _goldCount + count;
+	_goldCount = MIN(nowGold, _goldCapacity);
+	DM()->updateGold(_goldCount);
+
+	_goldCountText->setString(StringUtils::format("%d / %d", _goldCount, _goldCapacity));
+	_goldBar->setPercent((_goldCount*100.0)/_goldCapacity);
+};
+
+void HomeHubLayer::addWood(int count) {
+
+	//判断是否超过最大容量 
+	int newCount = _woodCount + count;
+	_woodCount = MIN(newCount, _woodCapacity);
+	DM()->updateGold(_woodCount);
+
+	_woodCountText->setString(StringUtils::format("%d / %d", _woodCount, _woodCapacity));
+	_woodBar->setPercent((_woodCount*100.0)/_woodCapacity);
+};
+
+void HomeHubLayer::addPlayerExp(int count) {
+
+	DM()->updatePlayerExp(count);
+	loadData();
+
+	_playerLevel->setString(GM()->getIntToStr(_level));
+	_playerBar->setPercent((_exp*100.0)/_expRequire);
+};
+
+void HomeHubLayer::setGoldCapacity(int count) {
+
+	_goldCapacity = count;
+	DM()->updateGoldCapacity(_goldCapacity);
+
+	_goldCountText->setString(StringUtils::format("%d / %d", _goldCount, _goldCapacity));
+	_goldBar->setPercent((_goldCount*100.0)/_goldCapacity);
+};
+
+void HomeHubLayer::setWoodCapacity(int count) {
+
+	_woodCapacity = count;
+	DM()->updateGoldCapacity(_woodCapacity);
+
+	 _woodCountText->setString(StringUtils::format("%d / %d", _woodCount, _woodCapacity));
+	_woodBar->setPercent((_woodCount*100.0)/_woodCapacity);
+};
+
+void HomeHubLayer::setMapLayer(Layer* layer) {
+
+	_mapLayer = layer;
+};
 
 void HomeHubLayer::btnCallback(Ref* sender, Widget::TouchEventType type) {
-	if(type == Widget::TouchEventType::ENDED) {
+
+	if(type==Widget::TouchEventType::ENDED) {
+
+		//测试
+		//addGold(100);
+		//addWood(100);
+		//addPlayerExp(100);
+		//setGoldCapacity(2000);
+		//setWoodCapacity(2000);
+
 		Button* btn = (Button*)sender;
 		auto name = btn->getName();
 		if(name == "WorldButton") {

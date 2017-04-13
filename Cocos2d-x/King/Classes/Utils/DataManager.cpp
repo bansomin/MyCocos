@@ -25,7 +25,6 @@ DataManager::~DataManager() {
 };
 
 bool DataManager::init() {
-	log("####################################################");
 
 	loadPlayerInfo();				//加载玩家信息_player
 	loadPlayerLevelInfo();			//加载玩家等级信息_playerLevelExp
@@ -266,7 +265,7 @@ void DataManager::loadBattleInfo() {
 
 	DBM()->loadCsvData(CSV_BATTLE_INFO, _battleBuilding);
 
-	for(int i = 0; i<_battleBuilding.size(); i++) {
+	for(int i = 0; i<(int)_battleBuilding.size(); i++) {
 		ValueMap& mapData = _battleBuilding.at(i).asValueMap();
 
 		//[1] 根据BuildingID，在 _buildingInfo 中查找对应建筑的信息
@@ -279,7 +278,6 @@ void DataManager::loadBattleInfo() {
 		}
 	}
 };
-
 
 //根据建筑ID，获取建筑信息
 ValueMap& DataManager::getBuildingInfo(int buildingID) {
@@ -295,12 +293,115 @@ int DataManager::getPlayerExpRequire(int level) {
 	return (_playerLevelExp[_indexPlayerLevel[levelStr]].asValueMap())["ExpRequire"].asInt();
 };
 
+//更新金币
+void DataManager::updateGold(int count) {
+	log("DataManager::updateGold");
+
+	ValueMap& map = _player.at(1).asValueMap();
+	map["GoldCount"] = count;
+
+	//更新数据库
+	string sql = "update PlayerInfo set GoldCount='"
+				 + map["GoldCount"].asString()
+				 + "' where ID="
+				 + map["ID"].asString()+";";
+	log("SQL = %s", sql.c_str());
+	DBM()->executeUpdate(sql);
+};
+
+//更新木材资源
+void DataManager::updateWood(int count) {
+	log("DataManager::updateWood");
+
+	ValueMap& map = _player.at(1).asValueMap();
+	map["WoodCount"] = count;
+
+	//更新数据库
+	string sql = "update PlayerInfo set WoodCount='"
+				+ map["WoodCount"].asString()
+				+ "' where ID="
+				+ map["ID"].asString()+";";
+	log("SQL = %s", sql.c_str());
+	DBM()->executeUpdate(sql);
+};
+
+//更新金币容量
+void DataManager::updateGoldCapacity(int count) {
+	log("DataManager::updateGoldCapacity");
+
+	ValueMap& map = _player.at(1).asValueMap();
+	map["GoldCapacity"] = count;
+
+	//更新数据库
+	string sql = "update PlayerInfo set GoldCapacity='"
+				+ map["GoldCapacity"].asString()
+				+ "' where ID="
+				+ map["ID"].asString()+";";
+	log("SQL = %s", sql.c_str());
+	DBM()->executeUpdate(sql);
+};
+
+//更新木材容量
+void DataManager::updateWoodCapacity(int count) {
+	log("DataManager::updateWoodCapacity");
+
+	ValueMap& map = _player.at(1).asValueMap();
+	map["WoodCapacity"] = count;
+
+	//更新数据库
+	string sql = "update PlayerInfo set WoodCapacity='"
+				+ map["WoodCapacity"].asString()
+				+ "' where ID="
+				+ map["ID"].asString()+";";
+	log("SQL = %s", sql.c_str());
+	DBM()->executeUpdate(sql);
+};
+
+//更新奖牌
+void DataManager::updateRing(int count) {
+	log("DataManager::updateRing");
+
+	ValueMap& map = _player.at(1).asValueMap();
+	map["RingCount"] = map["RingCount"].asInt() + count;
+
+	//更新数据库
+	string sql = "update PlayerInfo set RingCount='"
+				+ map["RingCount"].asString()
+				+ "' where ID="
+				+ map["ID"].asString()+";";
+	log("SQL = %s", sql.c_str());
+	DBM()->executeUpdate(sql);
+};
+
 //更新玩家经验
-void DataManager::updatePlayerExp(int exp) {
+void DataManager::updatePlayerExp(int count) {
+	log("DataManager::updatePlayerExp");
 
 	ValueMap& map = _player.at(1).asValueMap();
 	int preExp = map["Exp"].asInt();
-	int newExp = preExp + exp;
+	int newExp = preExp + count;
+	int expRequire = getPlayerExpRequire(map["Level"].asInt());
+
+	if(expRequire == -1) {	
+		log("EXP_Maximum");
+	}
+	else {
+		//升级
+		if(newExp >= expRequire) {
+			map["Level"] = map["Level"].asInt() + 1;
+			newExp -= expRequire;
+		}
+		map["Exp"] = newExp;
+
+		//更新数据库
+		string sql = "update PlayerInfo set Level='"+map["Level"].asString()
+					+ "', Exp='"
+					+ map["Exp"].asString()
+					+ "' where ID="
+					+ map["ID"].asString()+";";
+		log("SQL = %s", sql.c_str());
+		DBM()->executeUpdate(sql);
+	}
 };
 
 // 绑定下标

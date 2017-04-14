@@ -54,6 +54,9 @@ public:
 
 	bool isPointInDiamond(Vec2 centerPoint, Size size, Vec2 p);// 点是否在菱形内
 	float xmult(Vec2 p1, Vec2 p2, Vec2 p0);
+	
+	bool isOutMap(Vec2 pos);				//瓦片是否越界
+	bool isCovered(Vec2 pos);				// 地面是否被占据
 
 	//场景切换
 	void enterWorldScene();

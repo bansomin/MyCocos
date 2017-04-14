@@ -298,6 +298,30 @@ float GlobalManager::xmult(Vec2 p1, Vec2 p2, Vec2 p0) {
 	return (p1.x-p0.x)*(p2.y-p0.y)-(p2.x-p0.x)*(p1.y-p0.y);
 };
 
+//瓦片是否越界
+bool GlobalManager::isOutMap(Vec2 pos) {
+	
+	Vec2 tiledPos = getTiledPos(pos);
+	if(tiledPos.x < -EPS || tiledPos.x > TILED_TOTAL_X ||
+	   tiledPos.y < -EPS || tiledPos.y > TILED_TOTAL_Y) {
+		return true;
+	}
+	return false;
+};
+
+// 地面是否被占据
+bool GlobalManager::isCovered(Vec2 pos) {
+
+	int x = pos.x;
+	int y = pos.y;
+	if(x<0 || x>TILED_TOTAL_X ||
+	   y<0 || y>TILED_TOTAL_Y) {
+		return true;
+	}
+
+	return (_cover[x][y]!=0);
+};
+
 void GlobalManager::enterWorldScene() {
 	//log("enterWorldScene");
 

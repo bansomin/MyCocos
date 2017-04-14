@@ -26,6 +26,10 @@ public:
 public:
 	void loadData(int index);
 	void loadUI();
+	void moveBuilding(Vec2 delta);	//移动建筑
+	void selectedAction();			// 被选中时的动画效果
+	void unselectedAction();		// 去掉选中动画  
+	void setTiledPos();				// 设置瓦片坐标
 
 public:
     // 基础属性

@@ -11,7 +11,7 @@ HISTORY	:
 typedef long long LL;
 
 // 相关数值
-//static const float  EPS = 1e-6;
+static const double  EPS = 1e-6;
 //static const float  INF = 0x7fffffff;
 
 static const int NUMBER_NINE = 9;

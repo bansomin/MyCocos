@@ -92,6 +92,8 @@ public:
 	void updateWoodCapacity(int count);		//更新木材容量
 	void updateRing(int count);				//更新奖牌
 	void updatePlayerExp(int count);		//更新玩家经验
+											
+	void updateBuildingPos(int ID, Vec2 pos);  // 更新设施位置
 
 	int getPlayerExpRequire(int level);				//获取玩家的等级需求							
 	ValueMap& getBuildingInfo(int buildingID);		// 根据建筑ID，获取建筑信息

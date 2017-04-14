@@ -404,6 +404,20 @@ void DataManager::updatePlayerExp(int count) {
 	}
 };
 
+// 更新设施位置
+void DataManager::updateBuildingPos(int ID, Vec2 pos) {
+
+	ValueMap& map = _building.at(_indexBuilding[GM()->getIntToStr(ID)]).asValueMap();
+	map["PositionX"] = (int)pos.x;
+	map["PositionY"] = (int)pos.y;
+
+	// 更新设施位置(sqlite)
+	string sql =  "update BuildingListInfo set PositionX='"+map["PositionX"].asString()
+				+ "', PositionY='"+map["PositionY"].asString()
+				+ "' where ID="+map["ID"].asString()+";";
+	DBM()->executeUpdate(sql);
+};
+
 // 绑定下标
 void DataManager::bindingIndex(ValueVector &data, map<string, int>& index, string ID) {
 

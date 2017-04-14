@@ -4,6 +4,9 @@
 #include "Utils\Config.h"
 #include "Utils\DataManager.h"
 #include "Utils\GlobalManager.h"
+#include "UI\HomeScene\HomeScene.h"
+#include "UI\HomeScene\HomeMapLayer.h"
+
 
 BuildingSprite* BuildingSprite::create(int index, Vec2 ve) {
 
@@ -45,7 +48,7 @@ void BuildingSprite::addTouch() {
 	_listener = EventListenerTouchOneByOne::create();
 	_listener->onTouchBegan = CC_CALLBACK_2(BuildingSprite::onToucheBegan, this);
 	_listener->onTouchMoved = CC_CALLBACK_2(BuildingSprite::onToucheMoved, this);
-	//_listener->onTouchEnded = CC_CALLBACK_2(BuildingSprite::onTouchEnded, this);
+	_listener->onTouchEnded = CC_CALLBACK_2(BuildingSprite::onToucheEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_listener, this);
 
 };
@@ -105,7 +108,7 @@ void BuildingSprite::loadUI() {
 
 	_normal = GM()->getBuildingIMG(_type);
 	_normal->setAnchorPoint(Vec2::ZERO);
-	_normal->setPosition(Vec2(-15, -10));		//微调位置
+	_normal->setPosition(Vec2(-10, -5));		//微调位置
 	_broken = GM()->getBuildingBrokenIMG(_type);
 	_broken->setAnchorPoint(Vec2::ZERO);
 	_broken->setOpacity(0);
@@ -142,12 +145,12 @@ bool BuildingSprite::onToucheBegan(Touch* touch, Event* event) {
 	if(GM()->isPointInDiamond(this->getPosition(), TILED_SIZE*2, pos) == 1) {
 		log("I'm in.");
 		_isTouched = true;
-		if(_isSelected == true) {
-			log("@@@@@@@@@@@@@@True");
+		if(_isSelected) {
+			log("************** True");
+			_listener->setSwallowTouches(true);
 		}
 		else {
-			log("**************False");	
-			_listener->setSwallowTouches(true);
+			log("************** False");	
 		}
 	}
 	else {
@@ -163,8 +166,138 @@ bool BuildingSprite::onToucheBegan(Touch* touch, Event* event) {
 void BuildingSprite::onToucheMoved(Touch* touch, Event* event) {
 	log("onToucheMoved");
 
+	Vec2 pos = this->getParent()->convertToNodeSpace(touch->getLocation());
+	Vec2 delta = pos - this->getPosition();
+	_deltaPos += Vec2(0, 0).distance(touch->getDelta());
+	
+	if(_isSelected) {
+		moveBuilding(delta);
+	}
 };
 
 void BuildingSprite::onToucheEnded(Touch* touch, Event* event) {
 
+	log("_deltaPos = %f", _deltaPos);
+
+	//标记为被选中
+	if(_isTouched) {
+		if(_deltaPos <= LIMIT_DELTA) {
+			if(!_isSelected) {
+				//先除占地
+				GM()->setCoverd(_pos, -1);
+			}
+
+			_isSelected = true;
+			this->setOpacity(255);
+			this->setColor(Color3B::GREEN);
+			this->setLocalZOrder(TILED_TOTAL_X + TILED_TOTAL_Y + 1);
+			_tip->setOpacity(255);
+
+			//选中
+			selectedAction();
+		}
+	}
+	else {
+		if(_isShowOpt) {
+			_isSelected = false;
+			this->setOpacity(0);
+			this->setColor(Color3B::WHITE);
+			this->setTiledPos();
+			_tip->setOpacity(0);
+
+			unselectedAction();
+		}
+	}
+
+	// 显示/隐藏操作opt
+	if(_isTouched) {
+		/*if(_deltaPos<=LIMIT_DELTA) {
+			auto bgMap = (Sprite*)this->getParent();
+			auto colorlayer = (LayerColor*)bgMap->getParent();
+			auto mapLayer = (HomeMapLayer*)colorlayer->getParent();
+			auto optLayer = ((HomeScene*)mapLayer->getParent())->_option
+		}*/
+	}
+
 };
+
+//移动建筑
+void BuildingSprite::moveBuilding(Vec2 delta) {
+	
+	if(fabs(delta.x) >= TILED_WIDTH/2.0 ||
+	   fabs(delta.y) >= TILED_HEIGHT/2.0) {
+
+		int sgnX = 1, sgnY = 1;
+		if(delta.x < 0) {
+			sgnX = -1;
+		}
+		if(delta.y < 0) {
+			sgnY = -1;
+		}
+
+		Vec2 poss = this->getPosition()+Vec2(sgnX*TILED_WIDTH/2, sgnY*TILED_HEIGHT/2);
+
+		this->setPosition(poss);
+		Vec2 tiledPos = GM()->getTiledPos(this->getPosition());
+
+		//是否越界，或被其他设施占领
+		if(GM()->isOutMap(this->getPosition()) ||
+		   GM()->isCovered(tiledPos)) {
+			this->setColor(Color3B::RED);
+		}
+		else {
+			this->setColor(Color3B::GREEN);
+		}
+	}
+};
+
+//设置瓦片坐标
+void BuildingSprite::setTiledPos() {
+
+	auto mapPos = this->getPosition();
+	if(GM()->isOutMap(mapPos) || GM()->isCovered(GM()->getTiledPos(mapPos))) {
+		this->setPosition(GM()->getMapPos(_pos));
+	}
+	else {
+		_pos = GM()->getTiledPos(this->getPosition());
+
+		//更新数据库
+		DM()->updateBuildingPos(_id, _pos);
+	}
+	
+	this->setLocalZOrder(_pos.y + _pos.x);
+
+	//恢复占地
+	GM()->setCoverd(_pos, 1);
+};				
+
+//被选中时的动画效果
+void BuildingSprite::selectedAction() {
+
+	unselectedAction(); 
+
+	auto scaleUp = ScaleTo::create(0.1f, 1.1f);
+	auto scaleDown = ScaleTo::create(0.1f, 1.0f);
+	auto moveUp = MoveBy::create(0.1f, Vec2(0, 3));
+	auto moveDown = MoveBy::create(0.1f, Vec2(0, -3));
+	auto tintIn = TintTo::create(1.0f, Color3B(160, 160, 160));
+	//auto tintIn = TintTo::create(1.0f, Color3B::BLACK);
+	auto tintOut = TintTo::create(1.0f, Color3B::WHITE);
+	auto act1 = Sequence::create(scaleUp, scaleDown, nullptr);
+	auto act2 = Sequence::create(moveUp, moveDown, nullptr);
+	auto act3 = RepeatForever::create(Sequence::create(tintIn, tintOut, nullptr));
+
+	_normal->runAction(Spawn::create(act1, act2, nullptr));
+	_normal->runAction(act3);
+};
+
+// 去掉选中动画
+void BuildingSprite::unselectedAction() {
+
+	_normal->stopAllActions();
+	_normal->setScale(1.0f);
+	_normal->setPosition(Vec2(-10, -5));
+	_normal->setColor(Color3B::WHITE);
+};
+
+

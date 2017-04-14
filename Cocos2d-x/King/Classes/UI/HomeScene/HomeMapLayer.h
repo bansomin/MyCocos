@@ -26,14 +26,19 @@ public:
 	void onTouchesEnded(const std::vector<Touch*>& touches, Event* event);
 
 public:
-	void addMap();
+	void addMap();					//加载地图
+	void addFloor();				//加载地板
+	void addRobots();				//加载小机器人
+	void addObscale();				//加载花
+
+	void addTouch();				//添加触摸
+
 	void setHudLayer(Layer* layer);
 
 private:
 	Size _Wsize;
 	Vec2 _origin;
 
-	TMXTiledMap* _tileMap;	//瓦片地图
 	Layer* _bgLayer;		//背景层
 	Layer* _hubLayer;		//
 	Sprite* _bgMap;			//背景图	

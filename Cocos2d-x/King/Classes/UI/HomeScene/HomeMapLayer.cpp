@@ -2,6 +2,7 @@
 
 //use
 #include "Utils\Config.h"
+#include "Model\Robots.h"
 #include "Utils\DataManager.h"
 #include "Utils\GlobalManager.h"
 #include "Model\BuildingSprite.h"
@@ -24,6 +25,8 @@ bool HomeMapLayer::init() {
 	_cache = Director::getInstance()->getTextureCache();
 
 	addMap();
+	addRobots();
+	addObscale();
 
 	return true;
 };
@@ -51,44 +54,84 @@ void HomeMapLayer::addMap() {
 	map->setPosition(Vec2(_bgMap->getContentSize().width/2, _bgMap->getContentSize().height/2));
 	_bgMap->addChild(map, 1);
 
-	//玩家城池上添加瓦片地图
-	_tileMap = TMXTiledMap::create("common/map.tmx");
-	//_tileMap->setAnchorPoint(Vec2::ZERO);
-	_tileMap->setScale(0.5);
-	_tileMap->setPosition(Vec2(0, 100));
-	//_bgMap->addChild(_tileMap, 100);
-
 	//初始缩小
 	_bgMap->setScale(0.8f);
 	//初始动画
 	_bgMap->runAction(EaseBackInOut::create(ScaleTo::create(1.0f, 0.5f)));
+
+	addFloor();
+	addTouch();
+
+};
+
+//添加触摸
+void HomeMapLayer::addTouch() {
 
 	auto listener = EventListenerTouchAllAtOnce::create();
 	listener->onTouchesBegan = CC_CALLBACK_2(HomeMapLayer::onTouchesBegan, this);
 	listener->onTouchesMoved = CC_CALLBACK_2(HomeMapLayer::onTouchesMoved, this);
 	listener->onTouchesEnded = CC_CALLBACK_2(HomeMapLayer::onTouchesEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, _bgMap);
+};
 
+//加载地板
+void HomeMapLayer::addFloor() {
+				   
 	//清空占地情况
 	GM()->clearCovered();
 
 	auto size = _bgMap->getContentSize();
-	log("Size : %f, %f", size.width, size.height);
 
 	ValueVector building = DM()->_building;
-	log("######################################################## %d", building.size());
-	/*for(int i = 0; i<(int)building.size(); i++) {
+	for(int i = 0; i<(int)building.size(); i++) {
 		BuildingSprite* spr = BuildingSprite::create(i, Vec2::ZERO);
-		_bgMap->addChild(spr, 99);
-	}*/
+		_bgMap->addChild(spr, 2);
+	}
 
 	//测试代码
-	for(int i = 0; i<=38; i++) {
+	/*for(int i = 0; i<=38; i++) {
 		for(int j = 0; j<=38; j++) {
 			BuildingSprite* spr = BuildingSprite::create(1, Vec2(i, j));
 			_bgMap->addChild(spr, 99);
 		}
+	}*/
+};
+
+void HomeMapLayer::addRobots() {
+
+	for(int i = 1; i<=4; i++) {
+		auto robot = Robots::create(i);
+		_bgMap->addChild(robot);
 	}
+};
+
+void HomeMapLayer::addObscale() {
+
+	auto tree1 = Sprite::createWithTexture(_cache->getTextureForKey(IMG_TREE));
+	auto tree2 = Sprite::createWithTexture(_cache->getTextureForKey(IMG_TREE));
+	auto tree3 = Sprite::createWithTexture(_cache->getTextureForKey(IMG_TREE));
+	auto tree4 = Sprite::createWithTexture(_cache->getTextureForKey(IMG_TREE));
+
+	auto pos = GM()->getMapPos(Vec2(33, 33));
+	tree1->setPosition(GM()->getMapPos(Vec2(5, 5)));
+	tree2->setPosition(GM()->getMapPos(Vec2(33, 33)));
+	tree3->setPosition(GM()->getMapPos(Vec2(5, 33)));
+	tree4->setPosition(GM()->getMapPos(Vec2(33, 5)));
+
+	tree1->setLocalZOrder(10);
+	tree2->setLocalZOrder(66);
+	tree3->setLocalZOrder(38);
+	tree4->setLocalZOrder(38);
+
+	GM()->setCoverd(Vec2(5, 5), 1);
+	GM()->setCoverd(Vec2(33, 33), 1);
+	GM()->setCoverd(Vec2(5, 33), 1);
+	GM()->setCoverd(Vec2(33, 5), 1);
+
+	_bgMap->addChild(tree1);
+	_bgMap->addChild(tree2);
+	_bgMap->addChild(tree3);
+	_bgMap->addChild(tree4);
 
 };
 
@@ -216,6 +259,6 @@ void HomeMapLayer::onTouchesMoved(const std::vector<Touch*>& touches, Event* eve
 };
 
 void HomeMapLayer::onTouchesEnded(const std::vector<Touch*>& touches, Event* event) {
-	log("onTouchesEnded");
+	//log("onTouchesEnded");
 
 };

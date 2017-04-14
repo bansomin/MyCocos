@@ -13,6 +13,8 @@ typedef long long LL;
 // 相关数值
 //static const float  EPS = 1e-6;
 //static const float  INF = 0x7fffffff;
+
+static const int NUMBER_NINE = 9;
 static const float  LIMIT_DELTA = 10.0f;
 static const float  MAP_X = 1005;
 static const float  MAP_Y = 1373;
@@ -22,7 +24,7 @@ static const float  TILED_WIDTH = 45;
 static const float  TILED_HEIGHT = 32.5;
 static const int    TILED_TOTAL_X = 38;
 static const int    TILED_TOTAL_Y = 38;
-//static const CCSize TILED_SIZE = CCSize(45, 32.5);
+static const Size TILED_SIZE = Size(45, 32.5);
 static const int DX[] = {1, 1, 1, 0, -1, -1, -1, 0, 0};
 static const int DY[] = {1, 0, -1, -1, -1, 0, 1, 1, 0};
 

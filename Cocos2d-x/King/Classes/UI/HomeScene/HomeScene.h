@@ -16,12 +16,18 @@ HISTORY	:
 #include "UI\HomeScene\HomeOptionLayer.h"
 using namespace cocos2d;
 
+using namespace std;
+
 class HomeScene : public Layer {
 
 public:
 	static Scene* createScene();
 	virtual bool init();
 	CREATE_FUNC(HomeScene);
+
+public:
+	//≤‚ ‘
+	void onTouchesEnded(const vector<Touch*>& touches, Event* event);	//≤‚ ‘
 
 private:
 	HomeHubLayer* _hubLayer;

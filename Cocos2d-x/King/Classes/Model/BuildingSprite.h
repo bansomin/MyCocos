@@ -1,6 +1,6 @@
 /*************************BEGIN****************************************************
-Created by HAO on 2017/04/10
-BRIEF	: 数据管理
+Created by HAO on 2017/04/12
+BRIEF	: 
 VERSION	:
 HISTORY	:
 ***************************END****************************************************/
@@ -18,12 +18,13 @@ public:
 	static BuildingSprite* create(int index, Vec2 ve);
 
 public:
-	void onToucheBegan(const std::vector<Touch*>& touches, Event* event);
-	void onToucheMoved(const std::vector<Touch*>& touches, Event* event);
-	void onToucheEnded(const std::vector<Touch*>& touches, Event* event);
+	void addTouch();
+	bool onToucheBegan(Touch* touch, Event* event);
+	void onToucheMoved(Touch* touch, Event* event);
+	void onToucheEnded(Touch* touch, Event* event);
 
 public:
-	void loadData(int index, Vec2 ve);
+	void loadData(int index);
 	void loadUI();
 
 public:
@@ -72,7 +73,7 @@ public:
     bool _isSelected;           // 是否被选中
     bool _isShowOpt;            // 是否显示了opt操作
     float _deltaPos;            // 移动偏移
-    EventListenerTouchOneByOne* listener;
+    EventListenerTouchOneByOne* _listener;
     
     // 图片
     Size _size;			// 尺寸
@@ -81,6 +82,9 @@ public:
     Sprite* _normal;    // 正常图片
     Sprite* _broken;    // 毁坏图片
     Sprite* _tip;       // 箭头
+
+	TextureCache*_cache;	//纹理缓存
+
     
     //HarvestBubble* bubble;
 

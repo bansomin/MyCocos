@@ -15,10 +15,14 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/Helper/Sqlite3/sqlite3.c \
 				   ../../Classes/Helper/CSVParser/CSVParser.cpp \
 				   ../../Classes/Model/Notice.cpp \
+				   ../../Classes/Model/BuildingSprite.cpp \
+				   ../../Classes/Model/Robots.cpp \
 				   ../../Classes/UI/DialogScene/NewBuildDialog.cpp \
 				   ../../Classes/UI/HelloScene/HelloWorldScene.cpp \
                    ../../Classes/UI/HomeScene/HomeScene.cpp \
                    ../../Classes/UI/HomeScene/HomeHubLayer.cpp \
+                   ../../Classes/UI/HomeScene/HomeMapLayer.cpp \
+                   ../../Classes/UI/HomeScene/HomeOptionLayer.cpp \
                    ../../Classes/UI/WorldScene/WorldScene.cpp \
                    ../../Classes/UI/WorldScene/WorldHubLayer.cpp \
                    ../../Classes/Utils/DataManager.cpp \

@@ -18,7 +18,7 @@ bool HomeOptionLayer::init() {
 		return false;
 	}
 
-	_h = 150;
+	_h = -150;
 	_Wsize = Director::getInstance()->getWinSize();
 
 	this->loadData();

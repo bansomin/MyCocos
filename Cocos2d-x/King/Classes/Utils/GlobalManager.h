@@ -32,7 +32,6 @@ public:
 
 	bool _newBuild;
 
-
 public:
 	int getTimeStamp();						// 获取时间戳
 	string getIntToStr(int value);			//int转string
@@ -41,9 +40,20 @@ public:
 
 	void clearCovered();					// 清空占地情况
 	void setCoverd(Vec2 pos, int delta);	// 占据/释放地面：delta=1占据，=-1释放
-											
+
+	Vec2 getSpaceTiled();                   // 获取空地
+	ValueVector getNextSpace(Vec2 pos);     // 随机获取当前位置周围的空地
+
 	Vec2 getMapPos(Vec2 pos);				// 瓦片坐标 转 地图坐标
 	Vec2 getTiledPos(Vec2 pos);				// 地图坐标 转 瓦片坐标
+
+	Vec2 getMapDelta(int index);            // 根据瓦片坐标的偏移方向，获取地图坐标的偏移量
+											  
+	Sprite* getBuildingIMG(int type);		// 获取建筑的图片名
+	Sprite* getBuildingBrokenIMG(int type);  // 获取建筑被摧毁后的图片名
+
+	bool isPointInDiamond(Vec2 centerPoint, Size size, Vec2 p);// 点是否在菱形内
+	float xmult(Vec2 p1, Vec2 p2, Vec2 p0);
 
 	//场景切换
 	void enterWorldScene();

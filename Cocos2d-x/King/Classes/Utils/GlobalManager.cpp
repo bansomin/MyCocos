@@ -80,13 +80,10 @@ void GlobalManager::clearCovered() {
 // 占据/释放地面：delta=1占据，=-1释放
 void GlobalManager::setCoverd(Vec2 pos, int delta) {
 
-	for(int i = 0; i<9; i++) {
+	for(int i = 0; i < 9; i++) {
 		int x = pos.x + DX[i];
 		int y = pos.y + DY[i];
-		if(x<0 || x>TILED_TOTAL_X || 
-		   y<0 || y>TILED_TOTAL_Y ) {
-			continue;
-		}
+		if(x < 0||x > TILED_TOTAL_X||y < 0||y > TILED_TOTAL_Y) continue;
 		_cover[x][y] += delta;
 	}
 };
@@ -109,6 +106,196 @@ Vec2 GlobalManager::getTiledPos(Vec2 pos) {
 	int tx = (y-x)/2;
 	int ty = (y+x)/2;
 	return Vec2(tx, ty);
+};
+
+// 获取空地
+Vec2 GlobalManager::getSpaceTiled() {
+
+	queue<int> que;
+	bool vis[TILED_TOTAL_X+1][TILED_TOTAL_Y+1];
+	memset(vis, false, sizeof(vis));
+
+	que.push(19);
+	que.push(19);
+	vis[19][19] = true;
+
+	/*
+	while(!que.empty()) {
+		int x = que.front();
+		que.pop();
+		int y = que.front();
+		que.pop();
+
+		if(_cover[x][y] == 0) {
+			return Vec2(x, y);
+		}
+
+		for(int i = 0; i<NUMBER_NINE; i++) {
+			if(DX[i]==0 && DY[i]==0) continue;
+			int xx = x + DX[i];
+			int yy = y + DY[i];
+			if(xx<0 || xx>TILED_TOTAL_X || yy<0 || yy>TILED_TOTAL_Y)continue;
+			if(vis[xx][yy]) continue;
+			vis[xx][yy] = true;
+			que.push(xx);
+			que.push(yy);
+		}
+	}
+	return Vec2(19, 19);
+	*/
+
+	return Vec2(random(0, 38), random(0, 38));
+};
+
+// 随机获取当前位置周围的空地
+ValueVector GlobalManager::getNextSpace(Vec2 pos) {
+
+	ValueVector vv;
+	for(int i = 0; i < 9; i++) {
+		if(DX[i]==0&&DY[i]==0) continue;
+		int xx = pos.x+DX[i];
+		int yy = pos.y+DY[i];
+		if(xx < 0||xx > TILED_TOTAL_X||yy < 0||yy > TILED_TOTAL_Y) continue;
+		if(_cover[xx][yy]) continue;
+
+		ValueMap map;
+		map["x"] = xx; map["y"] = yy; map["dir"] = i;
+		vv.push_back((Value)map);
+	}
+	return vv;
+};
+
+// 根据瓦片坐标的偏移方向，获取地图坐标的偏移量
+Vec2 GlobalManager::getMapDelta(int index) {
+
+	switch(index) {
+		case 0: return Vec2(0, -TILED_HEIGHT);
+			break;
+		case 1: return Vec2(-TILED_WIDTH/2, -TILED_HEIGHT/2);
+			break;
+		case 2: return Vec2(-TILED_WIDTH, 0);
+			break;
+		case 3: return Vec2(-TILED_WIDTH/2, TILED_HEIGHT/2);
+			break;
+		case 4: return Vec2(0, TILED_HEIGHT);
+			break;
+		case 5: return Vec2(TILED_WIDTH/2, TILED_HEIGHT/2);
+			break;
+		case 6: return Vec2(TILED_WIDTH, 0);
+			break;
+		case 7: return Vec2(TILED_WIDTH/2, -TILED_HEIGHT/2);
+			break;
+		default:
+			break;
+	}
+	return Vec2(0, 0);
+};
+
+// 获取建筑的图片名
+Sprite* GlobalManager::getBuildingIMG(int type) {
+	log("GlobalManager::getBuildingIMG = %d", type);
+
+	auto tempSprite = Sprite::create();
+	switch(type) {
+		case BUILDING_TYPE_BaseTower:
+			tempSprite->setTexture(IMG_BUILDING_BaseTower);
+			break;
+		case BUILDING_TYPE_Raider:
+			tempSprite->setTexture(IMG_BUILDING_Raider);
+			break;
+		case BUILDING_TYPE_HeroHotel:
+			tempSprite->setTexture(IMG_BUILDING_HeroHotel);
+			break;
+		case BUILDING_TYPE_Camp:
+			tempSprite->setTexture(IMG_BUILDING_Camp);
+			break;
+		case BUILDING_TYPE_ResearchLab:
+			tempSprite->setTexture(IMG_BUILDING_ResearchLab);
+			break;
+		case BUILDING_TYPE_MineFactory:
+			tempSprite->setTexture(IMG_BUILDING_MineFactory);
+			break;
+		case BUILDING_TYPE_WoodFactory:
+			tempSprite->setTexture(IMG_BUILDING_WoodFactory);
+			break;
+		case BUILDING_TYPE_ArrowTower:
+			tempSprite->setTexture(IMG_BUILDING_ArrowTower);
+			break;
+		case BUILDING_TYPE_Cannon:
+			tempSprite->setTexture(IMG_BUILDING_Cannon);
+			break;
+		case BUILDING_TYPE_Laser:
+			tempSprite->setTexture(IMG_BUILDING_Laser);
+			break;
+		default:
+			break;
+	}
+	return tempSprite;
+};
+
+// 获取建筑被摧毁后的图片名
+Sprite* GlobalManager::getBuildingBrokenIMG(int type) {
+	log("GlobalManager::getBuildingBrokenIMG = %d", type);
+
+	auto tempSprite = Sprite::create();
+	switch(type) {
+		case BUILDING_TYPE_BaseTower:
+			tempSprite->setTexture(IMG_BUILDING_BaseTower_Broken);
+			break;
+		case BUILDING_TYPE_Raider:
+			tempSprite->setTexture(IMG_BUILDING_Raider_Broken);
+			break;
+		case BUILDING_TYPE_HeroHotel:
+			tempSprite->setTexture(IMG_BUILDING_HeroHotel_Broken);
+			break;
+		case BUILDING_TYPE_Camp:
+			tempSprite->setTexture(IMG_BUILDING_Camp_Broken);
+			break;
+		case BUILDING_TYPE_ResearchLab:
+			tempSprite->setTexture(IMG_BUILDING_ResearchLab_Broken);
+			break;
+		case BUILDING_TYPE_MineFactory:
+			tempSprite->setTexture(IMG_BUILDING_MineFactory_Broken);
+			break;
+		case BUILDING_TYPE_WoodFactory:
+			tempSprite->setTexture(IMG_BUILDING_WoodFactory_Broken);
+			break;
+		case BUILDING_TYPE_ArrowTower:
+			tempSprite->setTexture(IMG_BUILDING_ArrowTower_Broken);
+			break;
+		case BUILDING_TYPE_Cannon:
+			tempSprite->setTexture(IMG_BUILDING_Cannon_Broken);
+			break;
+		case BUILDING_TYPE_Laser:
+			tempSprite->setTexture(IMG_BUILDING_Laser_Broken);
+			break;
+		default:
+			break;
+	}
+
+	return tempSprite;
+};
+
+// 点是否在菱形内
+bool GlobalManager::isPointInDiamond(Vec2 centerPoint, Size size, Vec2 p) {
+
+	Vec2 p1 = centerPoint + Vec2(0, size.height/2);
+	Vec2 p2 = centerPoint + Vec2(size.width/2, 0);
+	Vec2 p3 = centerPoint + Vec2(0, -size.height/2);
+	Vec2 p4 = centerPoint + Vec2(-size.width/2, 0);
+
+	bool a = xmult(p, p2, p1) > 0;
+	bool b = xmult(p, p3, p2) > 0;
+	bool c = xmult(p, p4, p3) > 0;
+	bool d = xmult(p, p1, p4) > 0;
+
+	return (a==b)&&(a==c)&&(a==d);
+};
+
+// 叉乘
+float GlobalManager::xmult(Vec2 p1, Vec2 p2, Vec2 p0) {
+
+	return (p1.x-p0.x)*(p2.y-p0.y)-(p2.x-p0.x)*(p1.y-p0.y);
 };
 
 void GlobalManager::enterWorldScene() {

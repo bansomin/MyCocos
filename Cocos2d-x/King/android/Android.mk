@@ -18,6 +18,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/Model/BuildingSprite.cpp \
 				   ../../Classes/Model/Robots.cpp \
 				   ../../Classes/UI/DialogScene/NewBuildDialog.cpp \
+				   ../../Classes/UI/DialogScene/BuildingInfoDialog.cpp \
 				   ../../Classes/UI/HelloScene/HelloWorldScene.cpp \
                    ../../Classes/UI/HomeScene/HomeScene.cpp \
                    ../../Classes/UI/HomeScene/HomeHubLayer.cpp \

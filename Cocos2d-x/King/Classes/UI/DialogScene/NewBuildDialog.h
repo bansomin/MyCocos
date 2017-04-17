@@ -1,7 +1,12 @@
+/*************************BEGIN****************************************************
+Created by HAO on 2017/04/14
+BRIEF	:	½¨Öþ
+VERSION	:
+HISTORY	:
+***************************END****************************************************/
 
-
-#ifndef __NewBuildDialog_H__
-#define __NewBuildDialog_H__
+#ifndef __NEWBUILDDIALOG_H_
+#define __NEWBUILDDIALOG_H_
 
 #include "cocos2d.h"
 using namespace cocos2d;
@@ -32,4 +37,4 @@ private:
 
 };
 
-#endif // __NewBuildDialog_H__
+#endif // __NEWBUILDDIALOG_H_

@@ -141,12 +141,12 @@ void HomeMapLayer::setHudLayer(Layer* layer) {
 };
 
 void HomeMapLayer::onTouchesBegan(const std::vector<Touch*>& touches, Event* event) {
-	//log("onTouchesBegan");
+	//log("HomeMapLayer::onTouchesBegan");
 
 };
 
 void HomeMapLayer::onTouchesMoved(const std::vector<Touch*>& touches, Event* event) {
-	//log("onTouchesMoved");
+	log("HomeMapLayer::onTouchesMoved");
 
 	if(touches.size()==1) {	 //µ•µ„“∆∂Ø
 		//log("SIG");
@@ -259,6 +259,6 @@ void HomeMapLayer::onTouchesMoved(const std::vector<Touch*>& touches, Event* eve
 };
 
 void HomeMapLayer::onTouchesEnded(const std::vector<Touch*>& touches, Event* event) {
-	//log("onTouchesEnded");
+	//log("HomeMapLayer::onTouchesEnded");
 
 };

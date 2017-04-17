@@ -29,7 +29,7 @@ public:
 	//≤‚ ‘
 	void onTouchesEnded(const vector<Touch*>& touches, Event* event);	//≤‚ ‘
 
-private:
+public:
 	HomeHubLayer* _hubLayer;
 	HomeMapLayer* _mapLayer;
 	HomeOptionLayer* _optionLayer;

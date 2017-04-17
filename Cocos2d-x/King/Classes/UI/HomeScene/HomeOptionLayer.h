@@ -50,7 +50,7 @@ private:
 	Button* btnEnter;
 	Button* btnUpgrade;
 
-	BuildingSprite* _buildingSprite;
+	BuildingSprite* _buildingSprite; 
 };
 
 #endif // _HOMEOPTIONLAYER_H__

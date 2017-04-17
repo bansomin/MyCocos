@@ -4,6 +4,7 @@
 //#include "Utils\DataManager.h"
 #include "Utils\GlobalManager.h"
 //#include "UI\DialogScene\NewBuildDialog.h"
+#include "UI\DialogScene\BuildingInfoDialog.h"
 
 HomeOptionLayer::HomeOptionLayer() {
 
@@ -58,7 +59,7 @@ void HomeOptionLayer::loadUI() {
 	labelInfo->setPosition(Vec2(btnInfo->getContentSize().width/2, btnInfo->getContentSize().height));
 	labelEnter->setPosition(Vec2(btnEnter->getContentSize().width/2, btnEnter->getContentSize().height));
 	labelUpGrade->setPosition(Vec2(btnUpgrade->getContentSize().width/2, btnUpgrade->getContentSize().height));
-	_headquarters->setPosition(Vec2(_Wsize.width/2, 140));
+	_headquarters->setPosition(Vec2(_Wsize.width/2, 240));
 
 	btnInfo->addChild(labelInfo);
 	btnEnter->addChild(labelEnter);
@@ -75,6 +76,10 @@ void HomeOptionLayer::loadUI() {
 //ID为设施ID
 void HomeOptionLayer::show(BuildingSprite* spr) {
 
+	log("SHOW");
+
+	auto _chnStr = Dictionary::createWithContentsOfFile("fonts/myString.xml");
+
 	_buildingSprite = nullptr;
 	_buildingSprite = spr;
 
@@ -85,23 +90,28 @@ void HomeOptionLayer::show(BuildingSprite* spr) {
 
 	_headquarters->setOpacity(255);
 	_headquarters->setColor(Color3B::WHITE);
-	string title = _buildingSprite->_name+"(等级"+GM()->getIntToStr(_buildingSprite->_level)+")";
+	string title = _buildingSprite->_name + "(" +
+											((__String*)_chnStr->objectForKey("grade"))->getCString() + GM()->getIntToStr(_buildingSprite->_level)
+										  + ")";
 	_headquarters->setString(title);
 
 	//是否满级或是升级
 	auto lab = (Text*)btnUpgrade->getChildByName("BTNUPGRADE");
 	if(_buildingSprite->_baseLevelRequire != -1) {
 		if(_buildingSprite->_buildState == BUILDING_STATE_BUILDING) {
-			lab->setString("升级中");
+			//升级中
+			lab->setString(((__String*)_chnStr->objectForKey("updating"))->getCString());
 			btnUpgrade->loadTextureNormal(IMG_BUTTON_CANTUPGRADEOPT);
 		}
 		else {
-			lab->setString("升级");
+			//升级
+			lab->setString(((__String*)_chnStr->objectForKey("update"))->getCString());
 			btnUpgrade->loadTextureNormal(IMG_BUTTON_UPGRADEOPT);
 		}
 	}
 	else {
-		lab->setString("已满级");
+		//已满级
+		lab->setString(((__String*)_chnStr->objectForKey("updating"))->getCString());
 		btnUpgrade->loadTextureNormal(IMG_BUTTON_CANTUPGRADEOPT);
 	}
 
@@ -149,13 +159,17 @@ void HomeOptionLayer::showAction(Button* btn, float delay) {
 
 void HomeOptionLayer::hideAction(Button* btn, float delay) {
 
-	btn->runAction(EaseBackOut::create(MoveBy::create(delay, Vec2(0, -200))));
+	btn->runAction(EaseBackOut::create(MoveBy::create(delay, Vec2(0, -300))));
 };
 
 void HomeOptionLayer::infoCallback(Ref* sender, Widget::TouchEventType type) {
 
 	if(type==Widget::TouchEventType::ENDED) {
-		Button* btn = (Button*)sender;
+		if(_buildingSprite!=nullptr) {
+			auto buildingInfoDialog = BuildingInfoDialog::create(_buildingSprite);
+			this->getParent()->addChild(buildingInfoDialog, 10);
+		}
+
 	}
 };
 

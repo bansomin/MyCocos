@@ -50,7 +50,8 @@ public:
 	Vec2 getMapDelta(int index);            // 根据瓦片坐标的偏移方向，获取地图坐标的偏移量
 											  
 	Sprite* getBuildingIMG(int type);		// 获取建筑的图片名
-	Sprite* getBuildingBrokenIMG(int type);  // 获取建筑被摧毁后的图片名
+	Sprite* getBuildingBrokenIMG(int type); // 获取建筑被摧毁后的图片名
+	string getBuildingIMGName(int type);	//获取图片的名称
 
 	bool isPointInDiamond(Vec2 centerPoint, Size size, Vec2 p);// 点是否在菱形内
 	float xmult(Vec2 p1, Vec2 p2, Vec2 p0);

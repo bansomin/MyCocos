@@ -406,6 +406,7 @@ void DataManager::updatePlayerExp(int count) {
 
 // 更新设施位置
 void DataManager::updateBuildingPos(int ID, Vec2 pos) {
+	log("DataManager::updateBuildingPos");
 
 	ValueMap& map = _building.at(_indexBuilding[GM()->getIntToStr(ID)]).asValueMap();
 	map["PositionX"] = (int)pos.x;

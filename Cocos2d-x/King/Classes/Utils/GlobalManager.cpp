@@ -276,6 +276,47 @@ Sprite* GlobalManager::getBuildingBrokenIMG(int type) {
 	return tempSprite;
 };
 
+//获取图片的名称
+string GlobalManager::getBuildingIMGName(int type) {
+
+	auto tempName = "";
+	switch(type) {
+		case BUILDING_TYPE_BaseTower:
+			tempName = IMG_BUILDING_BaseTower;
+			break;
+		case BUILDING_TYPE_Raider:
+			tempName = IMG_BUILDING_Raider;
+			break;
+		case BUILDING_TYPE_HeroHotel:
+			tempName = IMG_BUILDING_HeroHotel;
+			break;
+		case BUILDING_TYPE_Camp:
+			tempName = IMG_BUILDING_Camp;
+			break;
+		case BUILDING_TYPE_ResearchLab:
+			tempName = IMG_BUILDING_ResearchLab;
+			break;
+		case BUILDING_TYPE_MineFactory:
+			tempName = IMG_BUILDING_MineFactory;
+			break;
+		case BUILDING_TYPE_WoodFactory:
+			tempName = IMG_BUILDING_WoodFactory;
+			break;
+		case BUILDING_TYPE_ArrowTower:
+			tempName = IMG_BUILDING_ArrowTower;
+			break;
+		case BUILDING_TYPE_Cannon:
+			tempName = IMG_BUILDING_Cannon;
+			break;
+		case BUILDING_TYPE_Laser:
+			tempName = IMG_BUILDING_Laser;
+			break;
+		default:
+			break;
+	}
+	return tempName;
+};
+
 // 点是否在菱形内
 bool GlobalManager::isPointInDiamond(Vec2 centerPoint, Size size, Vec2 p) {
 

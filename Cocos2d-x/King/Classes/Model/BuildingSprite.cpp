@@ -6,6 +6,7 @@
 #include "Utils\GlobalManager.h"
 #include "UI\HomeScene\HomeScene.h"
 #include "UI\HomeScene\HomeMapLayer.h"
+#include "UI\HomeScene\HomeOptionLayer.h"
 
 
 BuildingSprite* BuildingSprite::create(int index, Vec2 ve) {
@@ -50,7 +51,6 @@ void BuildingSprite::addTouch() {
 	_listener->onTouchMoved = CC_CALLBACK_2(BuildingSprite::onToucheMoved, this);
 	_listener->onTouchEnded = CC_CALLBACK_2(BuildingSprite::onToucheEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_listener, this);
-
 };
 
 void BuildingSprite::loadData(int index) { 
@@ -142,12 +142,13 @@ bool BuildingSprite::onToucheBegan(Touch* touch, Event* event) {
 	_deltaPos = 0.0;
 
 	//点到建筑后，屏蔽map层触摸
+	// 点是否在菱形内
 	if(GM()->isPointInDiamond(this->getPosition(), TILED_SIZE*2, pos) == 1) {
 		log("I'm in.");
-		_isTouched = true;
+		_isTouched = true;		//点击建筑
 		if(_isSelected) {
 			log("************** True");
-			_listener->setSwallowTouches(true);
+			_listener->setSwallowTouches(true);		//屏蔽下层触摸
 		}
 		else {
 			log("************** False");	
@@ -170,54 +171,59 @@ void BuildingSprite::onToucheMoved(Touch* touch, Event* event) {
 	Vec2 delta = pos - this->getPosition();
 	_deltaPos += Vec2(0, 0).distance(touch->getDelta());
 	
-	if(_isSelected) {
+	if(_isSelected) {			//移动建筑
 		moveBuilding(delta);
 	}
 };
 
 void BuildingSprite::onToucheEnded(Touch* touch, Event* event) {
 
-	log("_deltaPos = %f", _deltaPos);
+	//log("_deltaPos = %f", _deltaPos);
 
-	//标记为被选中
+	/*****************第一次触摸结束时，将建筑物标记为选中状态（显示指示箭头并开启动画）*****************/
 	if(_isTouched) {
-		if(_deltaPos <= LIMIT_DELTA) {
-			if(!_isSelected) {
-				//先除占地
+		if(_deltaPos<=LIMIT_DELTA){		//移动小于指定幅度
+			
+			//第一次点击
+			if(_isSelected==false) {
+				//先去除占地
 				GM()->setCoverd(_pos, -1);
+				log("CHU :　%f, %f", _pos.x, _pos.y);
 			}
 
 			_isSelected = true;
-			this->setOpacity(255);
-			this->setColor(Color3B::GREEN);
+			this->setOpacity(255);			//显示高亮地座
+			this->setColor(Color3B::GREEN);	//底部显示为绿色
 			this->setLocalZOrder(TILED_TOTAL_X + TILED_TOTAL_Y + 1);
-			_tip->setOpacity(255);
+			_tip->setOpacity(255);			//显示箭头
 
-			//选中
-			selectedAction();
+			selectedAction();				//播放选中时的动画
 		}
 	}
 	else {
-		if(_isShowOpt) {
-			_isSelected = false;
-			this->setOpacity(0);
-			this->setColor(Color3B::WHITE);
-			this->setTiledPos();
-			_tip->setOpacity(0);
+		_isSelected = false;				//取消选中状态
+		this->setOpacity(0);				//隐藏底部
+		this->setColor(Color3B::WHITE);		//底部显示为绿色
+		_tip->setOpacity(0);				//隐藏箭头
 
-			unselectedAction();
+		this->setTiledPos();				//设置瓦片坐标
+
+	}
+
+	auto _homeScene = (HomeScene*)((HomeMapLayer*)((LayerColor*)((Sprite*)this->getParent())->getParent())->getParent())->getParent();
+	auto _optionLayer = _homeScene->_optionLayer;
+
+	if(_isTouched && (_deltaPos<=LIMIT_DELTA)) {
+		if(!_isShowOpt) {
+			_isShowOpt = true;
+			_optionLayer->show(this);
 		}
 	}
-
-	// 显示/隐藏操作opt
-	if(_isTouched) {
-		/*if(_deltaPos<=LIMIT_DELTA) {
-			auto bgMap = (Sprite*)this->getParent();
-			auto colorlayer = (LayerColor*)bgMap->getParent();
-			auto mapLayer = (HomeMapLayer*)colorlayer->getParent();
-			auto optLayer = ((HomeScene*)mapLayer->getParent())->_option
-		}*/
+	else if(_isShowOpt) {
+		_isShowOpt = false;
+		_optionLayer->hide(this);
 	}
+
 
 };
 
@@ -255,18 +261,16 @@ void BuildingSprite::moveBuilding(Vec2 delta) {
 void BuildingSprite::setTiledPos() {
 
 	auto mapPos = this->getPosition();
+	//是否超出范围，新地址是否可用
 	if(GM()->isOutMap(mapPos) || GM()->isCovered(GM()->getTiledPos(mapPos))) {
 		this->setPosition(GM()->getMapPos(_pos));
 	}
 	else {
 		_pos = GM()->getTiledPos(this->getPosition());
-
 		//更新数据库
 		DM()->updateBuildingPos(_id, _pos);
 	}
-	
 	this->setLocalZOrder(_pos.y + _pos.x);
-
 	//恢复占地
 	GM()->setCoverd(_pos, 1);
 };				
@@ -274,14 +278,13 @@ void BuildingSprite::setTiledPos() {
 //被选中时的动画效果
 void BuildingSprite::selectedAction() {
 
-	unselectedAction(); 
+	unselectedAction();		//先取消之前动画 
 
 	auto scaleUp = ScaleTo::create(0.1f, 1.1f);
 	auto scaleDown = ScaleTo::create(0.1f, 1.0f);
 	auto moveUp = MoveBy::create(0.1f, Vec2(0, 3));
 	auto moveDown = MoveBy::create(0.1f, Vec2(0, -3));
 	auto tintIn = TintTo::create(1.0f, Color3B(160, 160, 160));
-	//auto tintIn = TintTo::create(1.0f, Color3B::BLACK);
 	auto tintOut = TintTo::create(1.0f, Color3B::WHITE);
 	auto act1 = Sequence::create(scaleUp, scaleDown, nullptr);
 	auto act2 = Sequence::create(moveUp, moveDown, nullptr);

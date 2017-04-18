@@ -286,12 +286,61 @@ ValueMap& DataManager::getBuildingInfo(int buildingID) {
 	return _buildingInfo[_indexBuildingInfo[id]].asValueMap();
 };
 
+// 获取设施下一等级信息
+ValueMap& DataManager::getBuildingNextInfo(int buildingID) {
+
+	string id = GM()->getIntToStr(buildingID + 1);
+	return _buildingInfo[_indexBuildingInfo[id]].asValueMap();
+};
+
 //获取玩家的等级需求
 int DataManager::getPlayerExpRequire(int level) {
 
 	string levelStr = StringUtils::format("%d", level);
 	return (_playerLevelExp[_indexPlayerLevel[levelStr]].asValueMap())["ExpRequire"].asInt();
 };
+
+// 获取玩家等级
+int DataManager::getPlayerLevel() {
+	
+	ValueMap& map = _player.at(1).asValueMap();
+	return map["Level"].asInt();
+};							
+
+// 获取司令部等级
+int DataManager::getBaseTowerLevel() {
+
+	ValueMap& map = _building[_baseID].asValueMap();
+	return map["Level"].asInt();
+};
+
+// 获取金币资源数量
+int DataManager::getGoldCount() {
+
+	ValueMap& map = _player.at(1).asValueMap();
+	return map["GoldCount"].asInt();
+};
+
+// 获取木材资源数量
+int DataManager::getWoodCount() {
+
+	ValueMap& map = _player.at(1).asValueMap();
+	return map["WoodCount"].asInt();
+};
+
+// 根据列表ID获取建筑信息
+ValueMap& DataManager::getBuilding(int ID) {
+
+	string id = GM()->getIntToStr(ID);
+	return _building[_indexBuilding[id]].asValueMap();
+};
+
+// 根据司令部等级，获取建筑限制
+ValueMap& DataManager::getBuildingLimit(int level) {
+
+	string lev = GM()->getIntToStr(level);
+	return _buildingLimit[_indexBuildingLimit[lev]].asValueMap();
+};			
 
 //更新金币
 void DataManager::updateGold(int count) {
@@ -416,6 +465,22 @@ void DataManager::updateBuildingPos(int ID, Vec2 pos) {
 	string sql =  "update BuildingListInfo set PositionX='"+map["PositionX"].asString()
 				+ "', PositionY='"+map["PositionY"].asString()
 				+ "' where ID="+map["ID"].asString()+";";
+	DBM()->executeUpdate(sql);
+};
+
+// 改变建造状态
+void DataManager::updateBuildingBuildState(int ID, int state) {
+
+	ValueMap& map = _building.at(_indexBuilding[GM()->getIntToStr(ID)]).asValueMap();
+	map["LastBuildTime"] = GM()->getTimeStamp();
+	map["BuildState"] = state;
+
+	//更新设施位置（sqlite）
+	string sql = "update BuildingListInfo set LastBuildTime='"
+			   + map["LastBuildTime"].asString()
+			   + "', BuildState='"
+			   + map["BuildState"].asString()
+			   + "' where ID="+map["ID"].asString()+";";
 	DBM()->executeUpdate(sql);
 };
 

@@ -93,10 +93,22 @@ public:
 	void updateRing(int count);				//更新奖牌
 	void updatePlayerExp(int count);		//更新玩家经验
 											
-	void updateBuildingPos(int ID, Vec2 pos);  // 更新设施位置
+	void updateBuildingPos(int ID, Vec2 pos);			// 更新设施位置
+	void updateBuildingBuildState(int ID, int state);	// 改变建造状态
 
-	int getPlayerExpRequire(int level);				//获取玩家的等级需求							
+public:
+
+	int getPlayerExpRequire(int level);				//获取玩家的等级需求
+	int getPlayerLevel();							// 获取玩家等级
+	int getBaseTowerLevel();						// 获取司令部等级
+	int getGoldCount();								// 获取金币资源数量
+	int getWoodCount();								// 获取木材资源数量
+	ValueMap& getBuilding(int ID);                  // 根据列表ID获取建筑信息
+	ValueMap& getBuildingLimit(int level);			// 根据司令部等级，获取建筑限制
 	ValueMap& getBuildingInfo(int buildingID);		// 根据建筑ID，获取建筑信息
+	ValueMap& getBuildingNextInfo(int buildingID);	// 获取设施下一等级信息
+
+
 	void bindingIndex(ValueVector &data, map<string, int>& index, string ID);// 绑定下标
 
 

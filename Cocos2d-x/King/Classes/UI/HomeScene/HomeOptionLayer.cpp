@@ -5,6 +5,7 @@
 #include "Utils\GlobalManager.h"
 //#include "UI\DialogScene\NewBuildDialog.h"
 #include "UI\DialogScene\BuildingInfoDialog.h"
+#include "UI\DialogScene\BuildingUpgradeDialog.h"
 
 HomeOptionLayer::HomeOptionLayer() {
 
@@ -166,6 +167,7 @@ void HomeOptionLayer::infoCallback(Ref* sender, Widget::TouchEventType type) {
 
 	if(type==Widget::TouchEventType::ENDED) {
 		if(_buildingSprite!=nullptr) {
+			log("HomeOptionLayer::infoCallback");
 			auto buildingInfoDialog = BuildingInfoDialog::create(_buildingSprite);
 			this->getParent()->addChild(buildingInfoDialog, 10);
 		}
@@ -183,6 +185,20 @@ void HomeOptionLayer::enterCallback(Ref* sender, Widget::TouchEventType type) {
 void HomeOptionLayer::upGradeCallback(Ref* sender, Widget::TouchEventType type) {
 	
 	if(type==Widget::TouchEventType::ENDED) {
-		Button* btn = (Button*)sender;
+		if(_buildingSprite!=nullptr) {
+			if(_buildingSprite->_baseLevelRequire !=-1) {
+				if(_buildingSprite->_buildState!=BUILDING_STATE_BUILDING) {
+					log("upgrade");
+					auto buildingupgradeDialog = BuildingUpgradeDialog::create(_buildingSprite);
+					this->getParent()->addChild(buildingupgradeDialog, 10);
+				}
+				else {
+					log("upgrading");
+				}
+			}
+			else {
+				log("Already full level.");
+			}
+		}
 	}
 };

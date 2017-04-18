@@ -32,6 +32,11 @@ public:
 	void setTiledPos();				// 设置瓦片坐标
 
 public:
+	void upgrade();                 // 升级操作
+	void showUpgradePro();			// 加入升级进度条
+	void upgradeFinished();			// 升级完成
+
+public:
     // 基础属性
     int _index;                 // 内存中的数组下标
     int _id;                    // 编号

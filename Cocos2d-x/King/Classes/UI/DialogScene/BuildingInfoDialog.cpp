@@ -2,6 +2,7 @@
 
 //use
 #include "Utils\Config.h"
+#include "Utils\DataManager.h"
 #include "Utils\GlobalManager.h"
 
 BuildingInfoDialog* BuildingInfoDialog::create(BuildingSprite* spr) {
@@ -42,13 +43,14 @@ bool BuildingInfoDialog::init(BuildingSprite* spr) {
 	btnClose->addTouchEventListener(CC_CALLBACK_2(BuildingInfoDialog::btnCloseFunc, this));
 
 	//加载数据
-	showInfo();	
+	addData();
 
 	return true;
 };
 
 //先加载数据，后显示动画
-void BuildingInfoDialog::showInfo() {
+void BuildingInfoDialog::addData() {
+	log("BuildingInfoDialog::addData");
 
 	auto _chnStr = Dictionary::createWithContentsOfFile("fonts/myString.xml"); 
 	auto ui = (Widget*)this->getChildByName("UI");
@@ -69,6 +71,7 @@ void BuildingInfoDialog::showInfo() {
 	title->setString(titleStr);
 
 	switch(_buildingSprite->_type) {
+
 		case BUILDING_TYPE_ArrowTower:		//狙击塔
 		case BUILDING_TYPE_Cannon:			//火箭发射器
 		case BUILDING_TYPE_Laser: {			//激光
@@ -90,6 +93,63 @@ void BuildingInfoDialog::showInfo() {
 		
 		}
 			break;
+
+		case BUILDING_TYPE_MineFactory : {		//金库
+			auto LB_goldProduct = (Text*)Helper::seekWidgetByName(ui, "lbGoldProduct");
+			auto Text_goldProduct = (Text*)Helper::seekWidgetByName(ui, "GoldProduct");
+
+			LB_goldProduct->setVisible(true);
+			Text_goldProduct->setString(GM()->getIntToStr(_buildingSprite->_goldProduct));
+		}
+			break;
+
+		case BUILDING_TYPE_WoodFactory : {		//木厂
+			auto LB_woodProduct = (Text*)Helper::seekWidgetByName(ui, "lbWoodProduct");
+			auto Text_woodProduct = (Text*)Helper::seekWidgetByName(ui, "WoodProduct");
+
+			LB_woodProduct->setVisible(true);
+			Text_woodProduct->setString(GM()->getIntToStr(_buildingSprite->_woodProduct));
+		}
+			break;
+
+		case BUILDING_TYPE_BaseTower : {
+			auto LB_goldCapacity = (Text*)Helper::seekWidgetByName(ui, "lbGoldCapacity");
+			auto LB_woodCapacity = (Text*)Helper::seekWidgetByName(ui, "lbWoodCapacity");
+			auto Text_goldCapacity = (Text*)Helper::seekWidgetByName(ui, "GoldCapacity");
+			auto Text_woodCapacity = (Text*)Helper::seekWidgetByName(ui, "WoodCapacity");
+
+		/*	LB_goldCapacity->setScale(1.5f);
+			LB_woodCapacity->setScale(1.5f);
+			Text_goldCapacity->setScale(1.5f);
+			Text_woodCapacity->setScale(1.5f);*/
+
+			LB_goldCapacity->setVisible(true);
+			LB_woodCapacity->setVisible(true);
+			Text_goldCapacity->setString(GM()->getIntToStr(_buildingSprite->_goldCapacity));
+			Text_woodCapacity->setString(GM()->getIntToStr(_buildingSprite->_woodCapacity));
+
+			//BuildingLimit
+			auto scrollView = (ScrollView*)Helper::seekWidgetByName(ui, "ScrollView");
+			auto mineFactory = (Text*)Helper::seekWidgetByName(ui, "MineFactoryLimit");
+			auto woodFactory = (Text*)Helper::seekWidgetByName(ui, "WoodFactoryLimit");
+			auto arrowTower = (Text*)Helper::seekWidgetByName(ui, "ArrowTowerLimit");
+			auto cannon = (Text*)Helper::seekWidgetByName(ui, "CannonLimit");
+			auto laser = (Text*)Helper::seekWidgetByName(ui, "LaserLimit");
+
+			auto baseLevel = DM()->getBaseTowerLevel();
+			auto limitMap = DM()->getBuildingLimit(baseLevel);
+			log("baseLevel:%d", baseLevel);
+
+			scrollView->setVisible(true);
+			mineFactory->setString("x"+limitMap["MineFactoryCapacity"].asString());
+			woodFactory->setString("x"+limitMap["WoodFactoryCapacity"].asString());
+			arrowTower->setString("x"+limitMap["ArrowTowerCapacity"].asString());
+			cannon->setString("x"+limitMap["CannonCapacity"].asString());
+			laser->setString("x"+limitMap["LaserCapacity"].asString());
+
+
+		}
+			break;
 		default:
 			break;
 	}
@@ -100,16 +160,8 @@ void BuildingInfoDialog::showInfo() {
 
 void BuildingInfoDialog::showDialog() {
 	
-	auto callfunc = CallFunc::create(CC_CALLBACK_0(BuildingInfoDialog::showInfo, this));
 	//动画
-	this->runAction(
-		Sequence::create(
-			EaseBackOut::create(ScaleTo::create(0.3f, 1.0f, 1.0f)),
-			callfunc, 
-			nullptr
-		)
-	);
-
+	this->runAction(EaseBackOut::create(ScaleTo::create(0.3f, 1.0f, 1.0f))); 
 };
 
 void BuildingInfoDialog::hideDialog() {

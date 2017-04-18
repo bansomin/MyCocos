@@ -1,13 +1,13 @@
 #include "BuildingSprite.h"
 
 //use
+#include "Model\BuildProcess.h"
 #include "Utils\Config.h"
 #include "Utils\DataManager.h"
 #include "Utils\GlobalManager.h"
 #include "UI\HomeScene\HomeScene.h"
 #include "UI\HomeScene\HomeMapLayer.h"
 #include "UI\HomeScene\HomeOptionLayer.h"
-
 
 BuildingSprite* BuildingSprite::create(int index, Vec2 ve) {
 
@@ -223,8 +223,6 @@ void BuildingSprite::onToucheEnded(Touch* touch, Event* event) {
 		_isShowOpt = false;
 		_optionLayer->hide(this);
 	}
-
-
 };
 
 //移动建筑
@@ -302,5 +300,47 @@ void BuildingSprite::unselectedAction() {
 	_normal->setPosition(Vec2(-10, -5));
 	_normal->setColor(Color3B::WHITE);
 };
+
+// 升级操作
+void BuildingSprite::upgrade() {
+	
+	//更新数据库：正在建设
+	DM()->updateBuildingBuildState(_id, BUILDING_STATE_BUILDING);
+
+	//更新内容
+	ValueMap& map = DM()->getBuilding(_id);
+	_buildState = BUILDING_STATE_BUILDING;
+	_lastBuildTime = map["LastBuildTime"].asInt();
+
+	showUpgradePro();
+};
+
+// 加入升级进度条
+void BuildingSprite::showUpgradePro() {
+
+	if(_buildState == BUILDING_STATE_BUILDING) {
+		log("BUILDING_STATE_BUILDING");
+
+		//加入进度条
+		auto buildPro = BuildProcess::create(this);
+		buildPro->setPosition(this->getContentSize().width/2, _normal->getContentSize().height - 20);
+		this->addChild(buildPro, 9999);
+	}
+};
+
+// 升级完成
+void BuildingSprite::upgradeFinished() {
+	
+	//动画特效
+	auto scaleUp = ScaleTo::create(0.1f, 0.1f);
+	auto scaleDown = ScaleTo::create(0.1f, 0.1f);
+	_normal->runAction(Sequence::create(scaleUp, scaleDown, nullptr));
+
+	//更新hubLayer玩家经验
+
+};
+
+
+
 
 

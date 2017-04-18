@@ -6,6 +6,18 @@
   <string>进入</string>  
   <key>update</key>
   <string>升级</string>
+  <key>updating</key>
+  <string>升级中</string>
+  <key>fulllevel</key>
+  <string>已满级</string>
   <key>headquarters</key>
   <string>司令部</string>
+  <key>grade</key>
+  <string>等级</string>
+  <key>needPlayerLevel</key>
+  <string>需要玩家等级</string>
+  <key>needheadquartersLevel</key>
+  <string>需要司令部等级</string>
+  <key>lackofres</key>
+  <string>资源不足</string>
 </dict>

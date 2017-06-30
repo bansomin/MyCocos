@@ -13,8 +13,7 @@ GC.ANIMATIONTYPE = {
 	OUT			:	"out",
 	IN			:	"in",
 	SHOW		:	"show",
-	HIDE		:	"hide",
-	SOUND		:	"sound"
+	HIDE		:	"hide"
 };
 
 GC.WORDNUMBERSOFLVL = 10;	//每一关单词数目
@@ -115,7 +114,6 @@ GC.randomMyArray = function () {
  * 动画
  */
 GC.prepareAnimation = function (type) {
-	cc.log("type : " + type);
 
 	var animation = new cc.Animation();
 
@@ -123,21 +121,17 @@ GC.prepareAnimation = function (type) {
 		case "out" :	//地鼠出洞
 			for (var i = 4; i >0 ; i--) {
 				var frameName = "dishu0" + i + ".png";
-				//cc.log("frameName : " + frameName);
 				animation.addSpriteFrame(cc.spriteFrameCache.getSpriteFrame(frameName));
 			}
 			animation.setDelayPerUnit(1/20);
 			break;
-
 		case "in" :		//地鼠进洞
 			for (var i = 1; i < 5; i++) {
 				var frameName = "dishu0" + i + ".png";
-				//cc.log("frameName : " + frameName);
 				animation.addSpriteFrame(cc.spriteFrameCache.getSpriteFrame(frameName));
 			}
 			animation.setDelayPerUnit(1/20);
 			break;
-
 		case "hammer" :	//锤子动画
 			for (var i = 1; i < 5; i++) {
 				var frameName = "0" + i + ".png";
@@ -145,22 +139,12 @@ GC.prepareAnimation = function (type) {
 			}
 			animation.setDelayPerUnit(1/20);
 			break;
-
 		case "countdown" :	//倒计时动画
 			for (var i = 3; i > 0; i--) {
 				var frameName = i + ".png";
 				animation.addSpriteFrame(cc.spriteFrameCache.getSpriteFrame(frameName));
 			}
 			animation.setDelayPerUnit(1);
-			break;
-
-		case "sound" :	//音乐图标动画
-			for (var i = 0; i < 3; i++) {
-				var frameName = "soundOn000" + i + ".png";
-				//cc.log("frameName : " + frameName);
-				animation.addSpriteFrame(cc.spriteFrameCache.getSpriteFrame(frameName));
-			}
-			animation.setDelayPerUnit(1/3);
 			break;
 
 	}

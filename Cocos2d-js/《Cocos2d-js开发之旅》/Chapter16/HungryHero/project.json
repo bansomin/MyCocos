@@ -1,7 +1,7 @@
 {
     "project_type": "javascript",
 
-    "debugMode"     : 0,
+    "debugMode"     : 1,    //开启debug模式
     "showFPS"       : false,
     "frameRate"     : 60,
     "noCache"       : false,

@@ -1,0 +1,242 @@
+body{
+    margin: 0;
+}
+
+/*没有网络情况下的div界面*/
+#net_Div{
+    width: 6.28rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+    height: 70%;
+    background: url("../images/duankai_bg.png") no-repeat;
+    background-size: 100% 100%;
+    overflow: hidden;
+    /*text-align: center;*/
+}
+
+.fill_Div{
+    width: 100%;
+    height: 75%;
+    /*background: blue;*/
+}
+
+.netbtn_Div{
+    width: 3.6rem;
+    height: 15%;
+    /*background: red;*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#net_btn{
+    width: 100%;
+    height: 100%;
+    background: url("../images/chonglian.png");
+    background-size: 100% 100%;
+    border: none;
+}
+
+
+.share_Div{
+    /*width: 7.2rem;*/
+    /*height: 12.8rem;*/
+    /*background: url("../images/jisuan.png") no-repeat center center;*/
+    background-size: 100% 100%;
+}
+
+.share_Div .text_Div{
+    /*height: 1rem;*/
+    height: 8%;
+    /*background: url("../images/fenxiang.png") no-repeat center center;*/
+    /*background-size: 85% 100%;*/
+    /*background: deeppink;*/
+    border: none;
+}
+
+.share_Div .text_Div .text_img_Div
+{
+    background: url("../images/fenxiang.png") no-repeat center center;
+    background-size: 100% 100%;
+    width: 96%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.share_Div .score_Div{
+    margin-top: 2%;
+    text-align: center;
+    height: 62%;
+
+
+}
+
+.share_Div .score_Div .scoreBG_Div{
+    width: 6.28rem;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    background: url("../images/bg.png") no-repeat;
+    background-size: 100% 100%;
+
+}
+
+.share_Div .score_Div .scoreBG_Div .scoreBG_P{
+    font-size: 0.8em;
+    color: #fff;
+    padding-top: 24.5%;
+
+}
+
+.share_Div .score_Div .scoreBG_Div .scoreBG_rankingP{
+    font-size: 0.35em;
+    color: #fff;
+    padding-top: 1.5%;
+}
+
+.share_Div .ranking_Div{
+    text-align: center;
+    height: 40%;
+    /*background: blue;*/
+}
+
+.share_Div .ranking_Div .rankingCont_Div{
+    width: 5.6rem;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    /*height: 4rem;*/
+    background: #b5d2b1;
+    box-sizing: border-box;
+    border: 0.08rem solid #fff;
+    overflow: hidden;
+    border-radius:0.2rem;
+    height: 100%;
+    /*background: blue;*/
+}
+
+.share_Div .ranking_Div .rankingCont_Div .rankingCont_Ul{
+    margin: 0;
+    font-size: 0.32rem;
+    height: 0.6rem;
+}
+
+.share_Div .ranking_Div .rankingCont_Div .rankingCont_Ul li div{
+    float: left;
+    font-size: 1em;
+    line-height: 0.6rem;
+}
+
+.share_Div .ranking_Div .rankingCont_Div .rankingCont_Ul li .rankingUlL_Div{
+    width: 1.36rem;
+    height: 0.6rem;
+    background: #51c727;
+
+}
+
+.share_Div .ranking_Div .rankingCont_Div .rankingCont_Ul li .rankingUlC_Div{
+    width: 1.96rem;
+    height: 0.6rem;
+    background: #59da2b;
+}
+
+.share_Div .ranking_Div .rankingCont_Div .rankingCont_Ul li .rankingUlR_Div{
+    width: 2.12rem;
+    height: 0.6rem;
+    background: #51c727;
+}
+
+.share_Div .ranking_Div .rankingCont_Div .data_Div{
+    height: 100%;
+    overflow: hidden;
+}
+
+.share_Div .ranking_Div .rankingCont_Div  .data_Ul{
+    margin: 0;
+    font-size: 0.32rem;
+    height: 80%;
+    overflow-y: scroll;
+    /*background: red;*/
+}
+
+
+.share_Div .ranking_Div .rankingCont_Div .data_Ul li div{
+    float: left;
+    font-size: 1em;
+    line-height: 0.6rem;
+    text-overflow: ellipsis
+}
+
+.share_Div .ranking_Div .rankingCont_Div .data_Ul li div span{
+    color: blueviolet;
+}
+
+.share_Div .ranking_Div .rankingCont_Div .data_Ul li{
+    overflow: hidden;
+    padding-top: 0.04rem;
+    /*background: url("../images/tiao.png") no-repeat center center;*/
+    background-size: 100% 100%;
+
+}
+.share_Div .ranking_Div .rankingCont_Div .data_Ul li .dataL_Div{
+    width: 1.36rem;
+    height: 0.6rem;
+    background: #dae9e9;
+
+}
+
+
+
+.share_Div .ranking_Div .rankingCont_Div .data_Ul li .dataC_Div{
+    width: 1.96rem;
+    height: 0.6rem;
+    background: #ecfeff;
+
+}
+
+.share_Div .ranking_Div .rankingCont_Div .data_Ul li .dataC_Div span{
+    color: #4f5f70;
+}
+
+.share_Div .ranking_Div .rankingCont_Div .data_Ul li .dataR_Div{
+    width: 2.12rem;
+    height: 0.6rem;
+    background: #dae9e9;
+}
+
+.share_Div .btn_Div{
+    /*height: 2.8rem;*/
+    /*background: lightcoral;*/
+    text-align: center;
+}
+
+.share_Div .btn_Div button{
+    width: 2.4rem;
+    height: 0.8rem;
+    border: none;
+    padding: 0;
+}
+
+.share_Div .btn_Div .btn_again{
+    background: url("../images/zaiwanyici.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.share_Div .btn_Div .btn_mianfei{
+    background: url("../images/mianfei.png") no-repeat;
+    background-size: 100% 100%;
+}
+.share_Div .btn_Div .num_p{
+    font-size: 0.5em;
+    /*margin-top: 0.3rem;*/
+    margin-top: 0.1%;
+    color: #fff;
+}
+.share_Div .btn_Div .btn_pp{
+    margin-top: 0.1rem;
+    line-height: 0.8rem;
+    height: 0.8rem;
+}

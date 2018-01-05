@@ -49,18 +49,22 @@ var HelloWorldLayer = cc.Layer.extend({
     	this.isDoubleTouch = false;
 		if(this.isTouch == false){
 			this.isTouch = true;
-			var action = cc.sequence(cc.delayTime(.4), cc.callFunc(function () {
-				this.isTouch = false;
-				if(this.isDoubleTouch == true) return;
-				//Single click
-				cc.log('Single click');
-				this._infoLab.setString("Single click");
-			}, this));
-			this.runAction(action);
+			this.runAction(
+				cc.sequence(
+					cc.delayTime(.4),
+					cc.callFunc(function () {
+						this.isTouch = false;
+						if(this.isDoubleTouch == true) return;
+						//Single click
+						cc.log('Single click');
+						this._infoLab.setString("Single click");
+					}, this)
+				)
+			);
 		}else {
 			this.isDoubleTouch = true;
 			//Double click
-			cc.log('Single click');
+			cc.log('Double click');
 			this._infoLab.setString("Double click");
 		}
 	}

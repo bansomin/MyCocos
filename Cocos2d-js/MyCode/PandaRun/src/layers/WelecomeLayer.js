@@ -50,10 +50,10 @@ var WelecomeLayer = cc.Layer.extend({
 		btn_start.setScale(0.6);
 		btn_start.runAction(
 			cc.sequence(
-				cc.moveTo(1, cc.p(200, 150)).easing(cc.easeElasticInOut(0.8)),
-				cc.delayTime(0.1),
-				cc.callFunc(this.myActionFunc, btn_start, "start")
-			)
+			cc.moveTo(1, cc.p(200, 150)).easing(cc.easeElasticInOut(0.8)),
+			cc.delayTime(0.1),
+			cc.callFunc(this.myActionFunc, btn_start, "start")
+		)
 		);
 
 		//******************************************************************************//

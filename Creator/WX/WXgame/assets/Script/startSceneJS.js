@@ -29,20 +29,8 @@ cc.Class({
 	onClickStartBtn: function (evn, type) {
 		Global.musicMgr.playClickSound();
 
-	},
+		cc.director.preloadScene(""
 
-	onClickShopBtn: function (evn, type) {
-		Global.musicMgr.playClickSound();
-
-	},
-
-	onClickSettingBtn: function (evn, type) {
-		Global.musicMgr.playClickSound();
-
-	},
-
-	onClickAboutBtn: function (evn, type) {
-		Global.musicMgr.playClickSound();
-
+		);
 	}
 });

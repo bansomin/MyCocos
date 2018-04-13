@@ -23,6 +23,8 @@ cc.Class({
 		var self = this;
 		cc.loader.onProgress = function (completedCount, totalCount, item) {
 			var percent = Math.floor(completedCount/totalCount).toFixed(2);
+			percent = percent<0 ? 0 : percent;
+			percent = percent>1 ? 1 : percent;
 			cc.log(item.content._name + " -- " + percent);
 			self.progressBar.progress = percent;
 			self.label.string = "加载" + item.content._name + "中 " + percent * 100 + "%";

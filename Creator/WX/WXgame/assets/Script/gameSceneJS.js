@@ -5,8 +5,11 @@
 
 var Wsize = null;
 
-var stickSize   = null;
-var npcNormal   =null;
+var heroSize   	= null;	//英雄的大小
+var stickSize   = null;	//棍子的大小
+var npcNormal   =null;	//
+
+var _width = 180;
 
 /**背景层**/
 var Score       = 0;    //分数
@@ -32,22 +35,44 @@ cc.Class({
 
     properties: {
 
-    	hero	:	cc.Node,
+    	hero		:	cc.Node,	//英雄
+		stickBlack	:	cc.Node,	//棍子
+
+
 		_animIndex	:	0
     },
 
-    onload: function () {
+    onLoad: function () {
 
     	this._animIndex = 0;
+
+    	this.initUI();
 	},
 
-	playAnimation: function (_name) {
+	initUI: function () {
 
-		var anim = this.hero.getComponent(cc.Animation);
-		var state = anim.play(_name);
-		state.wrapMode = cc.WrapMode.Loop;
+    	this.HeroJS = this.hero.getComponent("HeroJS");
+
+    	//init
+		Wsize = cc.director.getVisibleSize();
+		heroSize = this.HeroJS.getHeroContentSize();
+		stickSize = this.stickBlack.getContentSize();
+		cc.log("Wsize : " + Wsize.width + " ** " + Wsize.height);
+		cc.log("heroSize : " + heroSize.width + " ** " + heroSize.height);
+		cc.log("stickSize : " + stickSize.width + " ** " + stickSize.height);
+
+		this.stickBlack.setScale(180/stickSize.width, 387/stickSize.height);
+		//this.stickBlack.setPosition(cc.p(0, -Wsize.height/2 + stickSize.height/2));
+		this.stickBlack.setPosition(cc.p(0, 0));
+		var herx = this.stickBlack.getPositionX();
+		var hery = this.stickBlack.getPositionY() + this.stickBlack.getContentSize().height/2 + heroSize.height;
+		cc.log('herx : ' + herx + " ** " + hery);
+		this.hero.setPosition(cc.p(herx, hery));
+
+    	//棍子的位置
+
 	},
-	
+
 	onClickStartBtn: function (evn, type) {
 
 	},
@@ -56,9 +81,10 @@ cc.Class({
 
 		var animaName = animaList[this._animIndex];
 		cc.log("index : " + this._animIndex + "animaName : " + animaName);
-		this.playAnimation(animaName);
 		this._animIndex++;
 		this._animIndex = this._animIndex > 3 ? 0 : this._animIndex;
+
+		this.HeroJS.playAnimationByName(animaName);
 	}
 });
 

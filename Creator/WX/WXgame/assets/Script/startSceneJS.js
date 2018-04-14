@@ -29,8 +29,8 @@ cc.Class({
 	onClickStartBtn: function (evn, type) {
 		Global.musicMgr.playClickSound();
 
-		cc.director.preloadScene(""
-
-		);
+		cc.director.preloadScene('gameScene', function (error) {
+			cc.director.loadScene('gameScene');
+		});
 	}
 });

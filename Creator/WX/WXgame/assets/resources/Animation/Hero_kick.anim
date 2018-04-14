@@ -1,0 +1,77 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Hero_kick",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 0.9,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "anim": {
+        "comps": {
+          "cc.Sprite": {
+            "spriteFrame": [
+              {
+                "frame": 0,
+                "value": {
+                  "__uuid__": "dd850487-b07f-4c11-826c-2ee31b91407b"
+                }
+              },
+              {
+                "frame": 0.1,
+                "value": {
+                  "__uuid__": "a2c90417-ce63-44d6-bbba-31f76d96489d"
+                }
+              },
+              {
+                "frame": 0.2,
+                "value": {
+                  "__uuid__": "fd036ea8-577f-4e1d-bf25-ebef0252e78d"
+                }
+              },
+              {
+                "frame": 0.3,
+                "value": {
+                  "__uuid__": "0e8476ab-515f-4036-b611-96096c8abef5"
+                }
+              },
+              {
+                "frame": 0.4,
+                "value": {
+                  "__uuid__": "0e74aa8c-426b-4c17-8b89-267d61f965ae"
+                }
+              },
+              {
+                "frame": 0.5,
+                "value": {
+                  "__uuid__": "13bdc864-364b-4fdb-9a18-0c9c3b21e971"
+                }
+              },
+              {
+                "frame": 0.6,
+                "value": {
+                  "__uuid__": "184570b7-be28-4177-a9ac-2c10b481b2ed"
+                }
+              },
+              {
+                "frame": 0.7,
+                "value": {
+                  "__uuid__": "89b60b2b-b8ba-449a-9d85-c107350cb7df"
+                }
+              },
+              {
+                "frame": 0.8,
+                "value": {
+                  "__uuid__": "9bdff56a-3e5d-4840-bf8d-8308002bc820"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "events": []
+}

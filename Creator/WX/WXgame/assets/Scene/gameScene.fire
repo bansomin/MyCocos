@@ -45,7 +45,7 @@
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
     "groupIndex": 0,
-    "autoReleaseAssets": null
+    "autoReleaseAssets": false
   },
   {
     "__type__": "cc.Node",
@@ -63,10 +63,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 9
+        "__id__": 10
       },
       {
-        "__id__": 10
+        "__id__": 11
       }
     ],
     "_prefab": null,
@@ -345,7 +345,17 @@
     },
     "duration": 0.1,
     "zoomScale": 1.2,
-    "clickEvents": [],
+    "pressedSprite": {
+      "__uuid__": "51e20575-5ec3-4960-95b3-44ff218e61fe"
+    },
+    "hoverSprite": {
+      "__uuid__": "23812e37-f6fb-4f45-b55d-140e50a2c926"
+    },
+    "clickEvents": [
+      {
+        "__id__": 9
+      }
+    ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$normalColor": {
@@ -365,24 +375,21 @@
     "_N$normalSprite": {
       "__uuid__": "23812e37-f6fb-4f45-b55d-140e50a2c926"
     },
-    "_N$pressedSprite": {
-      "__uuid__": "51e20575-5ec3-4960-95b3-44ff218e61fe"
-    },
-    "pressedSprite": {
-      "__uuid__": "51e20575-5ec3-4960-95b3-44ff218e61fe"
-    },
-    "_N$hoverSprite": {
-      "__uuid__": "23812e37-f6fb-4f45-b55d-140e50a2c926"
-    },
-    "hoverSprite": {
-      "__uuid__": "23812e37-f6fb-4f45-b55d-140e50a2c926"
-    },
     "_N$disabledSprite": {
       "__uuid__": "51e20575-5ec3-4960-95b3-44ff218e61fe"
     },
     "_N$target": {
       "__id__": 6
     }
+  },
+  {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 2
+    },
+    "component": "gameSceneJS",
+    "handler": "onClickTestBtn",
+    "customEventData": ""
   },
   {
     "__type__": "cc.Canvas",
@@ -407,6 +414,8 @@
     "node": {
       "__id__": 2
     },
-    "_enabled": true
+    "_enabled": true,
+    "hero": null,
+    "_animIndex": 0
   }
 ]

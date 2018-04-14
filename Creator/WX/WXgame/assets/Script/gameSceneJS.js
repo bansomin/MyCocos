@@ -20,18 +20,45 @@ var curBlackXoffset = 0;    //生成黑块信息
 var betweenXoffset  = 0;    //两个黑块之间的距离
 var upBlackObject = null;   //增长黑块对象
 
+var animaList = [
+	'Hero_kick',
+	'Hero_shake',
+	"Hero_walk",
+	"Hero_yao"
+];
+
 cc.Class({
     extends: cc.Component,
 
     properties: {
 
+    	hero	:	cc.Node,
+		_animIndex	:	0
     },
 
     onload: function () {
 
-		//初始动作
-		npcController.initNPC(this);
-		npcController.yao();
+    	this._animIndex = 0;
+	},
+
+	playAnimation: function (_name) {
+
+		var anim = this.hero.getComponent(cc.Animation);
+		var state = anim.play(_name);
+		state.wrapMode = cc.WrapMode.Loop;
+	},
+	
+	onClickStartBtn: function (evn, type) {
+
+	},
+
+	onClickTestBtn: function (evn, type) {
+
+		var animaName = animaList[this._animIndex];
+		cc.log("index : " + this._animIndex + "animaName : " + animaName);
+		this.playAnimation(animaName);
+		this._animIndex++;
+		this._animIndex = this._animIndex > 3 ? 0 : this._animIndex;
 	}
 });
 

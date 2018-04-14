@@ -4,8 +4,5 @@
  */
 
 var HeroJS = cc.Class({
-
-	initNPC: function (_layer) {
-		
-	}
+	
 });

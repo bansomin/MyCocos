@@ -61,7 +61,7 @@ cc.Class({
 
 		var scaleX = 30;
 		var scaleY = 2;
-		this. .setScale(scaleX, scaleY);
+		this.stickBlack.setScale(scaleX, scaleY);
 		stickSize = this.stickBlack.getContentSize();
 		stickSize.width = stickSize.width * scaleX;
 		stickSize.height = stickSize.height * scaleY;

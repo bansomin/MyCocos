@@ -36,20 +36,33 @@ cc.Class({
 
     properties: {
 
+    	bgNode			:	cc.Node,
 		startBtn		:	cc.Button,
     	hero			:	cc.Node,	//英雄
 		stickBlack		:	cc.Node,	//棍子
 		newStickBlack	:	cc.Sprite,	//棍子
 
-		_animIndex	:	0
+        _start			:	false,	//游戏开始
     },
 
     onLoad: function () {
 
-    	this._animIndex = 0;
-
     	this.initUI();
 	},
+
+	onEnable: function () {
+
+        this._start = false;
+        this.bgNode.on(cc.Node.EventType.TOUCH_START, this.onTouchBegan.bind(this), this.node);
+		this.bgNode.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnded.bind(this), this.node);
+		this.bgNode.on(cc.Node.EventType.TOUCH_END, this.onTouchEnded.bind(this), this.node);
+    },
+
+	onDisable: function () {
+        this.bgNode.off(cc.Node.EventType.TOUCH_START, this.onTouchBegan.bind(this), this.node);
+        this.bgNode.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnded.bind(this), this.node);
+        this.bgNode.off(cc.Node.EventType.TOUCH_END, this.onTouchEnded.bind(this), this.node);
+    },
 
 	initUI: function () {
 
@@ -120,7 +133,9 @@ cc.Class({
     	var node = new cc.Node('Sprite');
     	upBlackObject = node.addComponent(cc.Sprite);
     	upBlackObject.spriteFrame = new cc.SpriteFrame(cc.url.raw("resources/textures/gameImg/stick_black.png"));
-    	node.setPosition(cc.p(gameViewXoffset + preBlackXoffset, 0));
+    	//node.setPosition(cc.p(gameViewXoffset + preBlackXoffset, 0));
+		node.setPosition(cc.p(this.hero.getPositionX() + heroSize.width/2, this.hero.getPositionY() - heroSize.height/2));
+    	node.setAnchorPoint(cc.p(0.5, 0));
     	node.setScaleY(0);
     	this.node.addChild(upBlackObject.node);
 
@@ -134,12 +149,99 @@ cc.Class({
 		newstickBlack.spriteFrame = new cc.SpriteFrame(cc.url.raw("resources/textures/gameImg/stick_black.png"));
 		var newSize = newstickBlack.node.getContentSize();
 		var scalex = GC.GC.scaleData[0];
-		/*newSize.width = newSize.width * scalex;
-		newSize.height = newSize.height * scalex;*/
-		cc.log("scalex:" + scalex + " | size:" + newSize.width + " && " + newSize.height);
-		newstickBlack.node.setScale(scalex, 2);
+		var width = stickSize.width * scalex;
+		cc.log("scalex:" + scalex + " | size:" + newSize.width + " && " + newSize.height + " => " + width);
+        scalex = width / newSize.width;
+		cc.log("scalex:" + scalex);
+        newstickBlack.node.setScale(scalex, 2);
+        //隐藏黑块到屏幕外
+        node1.setPosition(cc.p(gameViewXoffset + Wsize.width/2 + newSize.width, -Wsize.height/2 + stickSize.height/2 - 100));
 		this.node.addChild(node1);
-	}
+
+		var offset = Wsize.width - preBlackXoffset;
+        var flag = cc.random0To1() * 120 + 10;
+        var flag1 = (cc.random0To1() + 0.6)/2;
+
+
+		curBlackXoffset = flag;
+		betweenXoffset = flag1 * offset;
+
+		//移动到屏幕中间
+		node1.runAction(
+			cc.sequence(
+				cc.moveBy(GC.GC.newBlackTime, cc.p(-betweenXoffset, 0)),
+				cc.callFunc(this.setFlagFunc, this)
+			)
+		);
+	},
+
+	setFlagFunc: function () {
+		this._start = true;
+    },
+
+    onTouchBegan: function(){
+		cc.log("onTouchBegan");
+
+		if(this._start==false) return;
+        this.startSchedule();
+	},
+
+    onTouchEnded: function () {
+        cc.log("onTouchEnded");
+
+        if(this._start==false) return;
+        this.stopSchedule();
+    },
+
+	//开启定时器
+    startSchedule: function () {
+		cc.log("startSchedule");
+
+		this.schedule(this.upBlackFunc, 0.02);
+		this.heroAnimation(ANIMATION_TYPE.SHAKE);
+    },
+
+    stopSchedule: function () {
+        cc.log("stopSchedule");
+        this._start = false;	//触摸停止
+
+        this.unschedule(this.upBlackFunc);
+        this.heroAnimation(ANIMATION_TYPE.KICK);
+
+        upBlackObject.node.runAction(
+        	cc.sequence(
+        		cc.delayTime(0.5),
+				cc.rotateBy(0.1, 90),
+				cc.callFunc(this.rotateEnd, this)
+			)
+		);
+    },
+
+	//更新木棍长度
+    upBlackFunc: function () {
+        cc.log("upBlackFunc");
+
+        var scaleY = upBlackObject.node.getScaleY() + GC.GC.scaleSpeed;
+        upBlackObject.node.setScaleY(scaleY);
+    },
+
+	//操作结束
+    rotateEnd: function () {
+        cc.log("rotateEnd");
+
+        var size = upBlackObject.node.getContentSize();
+        var finalHeight = upBlackObject.node.getScaleY() * size.height;
+
+        //判断是否可以通过
+		var offset = (betweenXoffset + preBlackXoffset);
+		var result = Wsize.width - offset;
+
+        if (result+5 <= finalHeight && (result+curBlackXoffset >= finalHeight)){
+            cc.log("成功！");
+        }else {
+            cc.log("失败！");
+        }
+    }
 });
 
 

@@ -16,7 +16,7 @@ GC.scaleSpeed = 0.01;
 GC.screenTime = 0.5;
 
 //新黑块左移动速度
-GC.newBlackTime = 1.5;
+GC.newBlackTime = 0.6;
 
 GC.scaleData = [0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3 , 0.2, 0.1];
 
